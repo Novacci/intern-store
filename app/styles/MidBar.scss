@@ -1,0 +1,11 @@
+.flex-position {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.child-position {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
