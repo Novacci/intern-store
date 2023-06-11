@@ -1,6 +1,7 @@
 import './globals.scss';
 import TopBar from './components/TopBar';
 import MidBar from './components/MidBar';
+import BotBar from './components/BotBar';
 
 export const metadata = {
   title: 'Next.js',
@@ -17,6 +18,7 @@ export default function RootLayout({
       <body>{children}</body>
       <TopBar />
       <MidBar />
+      <BotBar />
     </html>
   );
 }
