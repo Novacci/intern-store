@@ -3,6 +3,7 @@ import React from 'react';
 import TopBar from './components/TopBar';
 import MidBar from './components/MidBar';
 import BotBar from './components/BotBar';
+import { Html } from 'next/document';
 
 export const metadata = {
   title: 'Next.js',
@@ -15,11 +16,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <div>
       <TopBar />
       <MidBar />
       <BotBar />
       <body>{children}</body>
-    </html>
+    </div>
   );
 }

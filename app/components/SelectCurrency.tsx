@@ -5,28 +5,40 @@ import usaFlag from '../assets/flags/united-states.png';
 import './../styles/SelectCurrency.scss';
 import Image from 'next/image';
 
-// interface FlagType {
-//   value: string;
-//   src: string | HTMLImageElement;
-// }
-
 const options = [
   {
-    value: 'pl',
+    value: 'PLN',
     label: <Image className={'flag-style'} src={polishFlag} alt="polish" />,
   },
   {
-    value: 'us',
+    value: 'USD',
     label: <Image className={'flag-style'} src={usaFlag} alt="usa" />,
   },
 ];
+
+const customStyles = {
+  option: (provided: any) => ({
+    ...provided,
+    color: 'green',
+    padding: 5,
+    border: 'none',
+  }),
+  control: (base: any, state: any) => ({
+    ...base,
+    border: state.isFocused ? 0 : 0,
+    boxShadow: state.isFocused ? 0 : 0,
+    '&:hover': {
+      border: state.isFocused ? 0 : 0,
+    },
+  }),
+};
 
 export default function SelectCurrency() {
   return (
     <>
       <Select
+        styles={customStyles}
         options={options}
-        className={'react-select-container'}
         defaultValue={options[1]}
         isSearchable={false}
       />
