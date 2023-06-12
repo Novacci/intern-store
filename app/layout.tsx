@@ -3,7 +3,6 @@ import React from 'react';
 import TopBar from './components/TopBar';
 import MidBar from './components/MidBar';
 import BotBar from './components/BotBar';
-import { Html } from 'next/document';
 
 export const metadata = {
   title: 'Next.js',
