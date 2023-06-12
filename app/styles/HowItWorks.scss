@@ -1,0 +1,29 @@
+$font-stack: itc-avant-garde-gothic-pro, sans-serif;
+$green: rgb(0, 193, 137);
+* {
+  font-family: $font-stack;
+}
+
+.sections-position {
+  display: flex;
+}
+
+.first-section {
+  width: 50%;
+  height: 450px;
+  h3 {
+    color: $green;
+  }
+  h2 {
+    font-size: 1.8rem;
+    color: rgb(64, 54, 54);
+    opacity: 0.8;
+  }
+}
+.second-section {
+  width: 50%;
+  height: 450px;
+  h3 {
+    color: $green;
+  }
+}
