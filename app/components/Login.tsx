@@ -1,5 +1,5 @@
 import React from 'react';
-import login from '../assets/login.svg';
+import login from '../assets/icons/login.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 

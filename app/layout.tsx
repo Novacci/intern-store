@@ -1,4 +1,5 @@
 import './globals.scss';
+import React from 'react';
 import TopBar from './components/TopBar';
 import MidBar from './components/MidBar';
 import BotBar from './components/BotBar';
@@ -15,10 +16,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
       <TopBar />
       <MidBar />
       <BotBar />
+      <body>{children}</body>
     </html>
   );
 }

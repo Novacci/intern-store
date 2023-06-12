@@ -3,6 +3,7 @@ import Select from 'react-select';
 import polishFlag from '../assets/flags/poland.png';
 import usaFlag from '../assets/flags/united-states.png';
 import './../styles/SelectCurrency.scss';
+import Image from 'next/image';
 
 // interface FlagType {
 //   value: string;
@@ -12,13 +13,11 @@ import './../styles/SelectCurrency.scss';
 const options = [
   {
     value: 'pl',
-    // label: <img className={'flag-style'} src={polishFlag} alt="polish" />,
-    label: 'Poland',
+    label: <Image className={'flag-style'} src={polishFlag} alt="polish" />,
   },
   {
-    value: 'en',
-    // label: <img className={'flag-style'} src={usaFlag} alt="usa" />,
-    label: 'USA',
+    value: 'us',
+    label: <Image className={'flag-style'} src={usaFlag} alt="usa" />,
   },
 ];
 
