@@ -16,30 +16,30 @@ const options = [
   },
 ];
 
-const customStyles = {
-  option: (provided: any) => ({
-    ...provided,
-    color: 'green',
-    padding: 5,
-    border: 'none',
-  }),
-  control: (base: any, state: any) => ({
-    ...base,
-    border: state.isFocused ? 0 : 0,
-    boxShadow: state.isFocused ? 0 : 0,
-    '&:hover': {
-      border: state.isFocused ? 0 : 0,
-    },
-  }),
-};
+// const customStyles = {
+//   option: (provided: any) => ({
+//     ...provided,
+//     color: 'green',
+//     padding: 5,
+//     border: 'none',
+//   }),
+//   control: (base: any, state: any) => ({
+//     ...base,
+//     border: state.isFocused ? 0 : 0,
+//     boxShadow: state.isFocused ? 0 : 0,
+//     '&:hover': {
+//       border: state.isFocused ? 0 : 0,
+//     },
+//   }),
+// };
 
 export default function SelectCurrency() {
   return (
     <>
       <Select
-        styles={customStyles}
+        // styles={customStyles}
         options={options}
-        defaultValue={options[1]}
+        defaultValue={options[0]}
         isSearchable={false}
       />
     </>

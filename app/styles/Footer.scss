@@ -1,0 +1,26 @@
+$font-stack: itc-avant-garde-gothic-pro, sans-serif;
+
+.footer-container {
+  font-family: $font-stack;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgba(34, 34, 34, 0.4);
+  a {
+    text-decoration: none;
+    color: rgba(34, 34, 34, 0.4);
+  }
+  img {
+    padding: 0rem 2rem;
+  }
+  .flex-position {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  p {
+    margin: 0;
+    padding: 0.5rem;
+  }
+}

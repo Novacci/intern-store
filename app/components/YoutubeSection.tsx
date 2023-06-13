@@ -1,6 +1,5 @@
 import React from 'react';
 import '../styles/YoutubeSection.scss';
-import Link from 'next/link';
 
 export default function YoutubeSection() {
   return (
@@ -8,14 +7,18 @@ export default function YoutubeSection() {
       <h2>our youtube channel</h2>
       <iframe
         width="100%"
-        height="100%"
+        height="500px"
         src="https://www.youtube.com/embed/i810CxN5Q6Q"
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       ></iframe>
-      <Link href="/">
-        <span>subscribe</span>
-      </Link>
+      <a
+        rel="noreferrer"
+        target="_blank"
+        href="https://www.youtube.com/@BrunoSaraviaPhotography?sub_confirmation=1"
+      >
+        subscribe
+      </a>
     </div>
   );
 }
