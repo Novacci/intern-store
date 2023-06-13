@@ -1,6 +1,6 @@
 'use client';
 
-import './../styles/MidBar.scss';
+import '../app/styles/MidBar.scss';
 import SelectCurrency from './SelectCurrency';
 import Login from './Login';
 import Cart from './Cart';

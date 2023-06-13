@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import '../styles/BotBar.scss';
+import '../app/styles/BotBar.scss';
 
 export default function BotBar() {
   return (

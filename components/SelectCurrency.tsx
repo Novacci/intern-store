@@ -1,9 +1,9 @@
 import React from 'react';
 import Select from 'react-select';
-import polishFlag from '../assets/flags/poland.png';
-import usaFlag from '../assets/flags/united-states.png';
-import './../styles/SelectCurrency.scss';
+import polishFlag from '../public/images/flags/poland.png';
+import usaFlag from '../public/images/flags/united-states.png';
 import Image from 'next/image';
+import '../app/styles/SelectCurrency.scss';
 
 const options = [
   {

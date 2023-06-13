@@ -1,5 +1,5 @@
 import React from 'react';
-import cart from '../assets/icons/cart.svg';
+import cart from '../public/images/icons/cart.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 

@@ -1,9 +1,9 @@
 import React from 'react';
-import '../styles/Footer.scss';
+import '../app/styles/Footer.scss';
 import Image from 'next/image';
-import facebook from '../assets/icons/facebook.svg';
-import youtube from '../assets/icons/youtube.svg';
-import instagram from '../assets/icons/instagram.svg';
+import facebook from '../public/images/icons/facebook.svg';
+import youtube from '../public/images/icons/youtube.svg';
+import instagram from '../public/images/icons/instagram.svg';
 import Link from 'next/link';
 
 export default function Footer() {
@@ -27,7 +27,7 @@ export default function Footer() {
       </div>
       <div className="flex-position">
         <Link href="/privacy-policy">Privacy Policy</Link>
-        <p>Copyright © 2023 Novacci</p>
+        <p>Copyright © 2023 Novacc</p>
       </div>
     </footer>
   );

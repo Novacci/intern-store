@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/YoutubeSection.scss';
+import '../app/styles/YoutubeSection.scss';
 
 export default function YoutubeSection() {
   return (

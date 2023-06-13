@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/Intro.scss';
+import '../app/styles/Intro.scss';
 import Link from 'next/link';
 
 export default function Intro() {

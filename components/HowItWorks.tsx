@@ -1,9 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
-import '../styles/HowItWorks.scss';
-import stageOne from '../assets/images/stage1.png';
-import stageTwo from '../assets/images/stage2.png';
-import stageThree from '../assets/images/stage3.png';
+import '../app/styles/HowItWorks.scss';
+import stageOne from '../public/images/main-page-imgs/stage1.png';
+import stageTwo from '../public/images/main-page-imgs/stage2.png';
+import stageThree from '../public/images/main-page-imgs/stage3.png';
 
 export default function HowItWorks() {
   return (
