@@ -8,36 +8,46 @@ import '../app/styles/SelectCurrency.scss';
 const options = [
   {
     value: 'PLN',
-    label: <Image className={'flag-style'} src={polishFlag} alt="polish" />,
+    label: (
+      <div className="default-style">
+        <Image className={'flag-style'} src={polishFlag} alt="polish" />
+        <span>PLN</span>
+      </div>
+    ),
   },
   {
     value: 'USD',
-    label: <Image className={'flag-style'} src={usaFlag} alt="usa" />,
+    label: (
+      <div className="default-style">
+        <Image className={'flag-style'} src={usaFlag} alt="usa" />
+        <span>USD</span>
+      </div>
+    ),
   },
 ];
 
-// const customStyles = {
-//   option: (provided: any) => ({
-//     ...provided,
-//     color: 'green',
-//     padding: 5,
-//     border: 'none',
-//   }),
-//   control: (base: any, state: any) => ({
-//     ...base,
-//     border: state.isFocused ? 0 : 0,
-//     boxShadow: state.isFocused ? 0 : 0,
-//     '&:hover': {
-//       border: state.isFocused ? 0 : 0,
-//     },
-//   }),
-// };
+const customStyles = {
+  option: (provided: any) => ({
+    ...provided,
+    color: 'green',
+    padding: 5,
+    border: 'none',
+  }),
+  control: (base: any, state: any) => ({
+    ...base,
+    border: state.isFocused ? 0 : 0,
+    boxShadow: state.isFocused ? 0 : 0,
+    '&:hover': {
+      border: state.isFocused ? 0 : 0,
+    },
+  }),
+};
 
 export default function SelectCurrency() {
   return (
     <>
       <Select
-        // styles={customStyles}
+        styles={customStyles}
         options={options}
         defaultValue={options[0]}
         isSearchable={false}

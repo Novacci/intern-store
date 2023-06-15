@@ -10,3 +10,13 @@
   font-family: itc-avant-garde-gothic-pro, sans-serif;
   font-weight: 600;
 }
+
+.default-style {
+  display: flex;
+  align-items: center;
+  span {
+    color: #00c189;
+    margin-left: 0.5rem;
+    font-size: 0.7rem;
+  }
+}
