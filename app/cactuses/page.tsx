@@ -1,5 +1,10 @@
+import CactusList from '@/components/CactusItems/CactusList';
 import React from 'react';
 
 export default function Home() {
-  return <div>cactus</div>;
+  return (
+    <div>
+      <CactusList />
+    </div>
+  );
 }

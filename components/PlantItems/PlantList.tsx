@@ -12,14 +12,14 @@ import Tulip from '../../public/images/flowers/Tulip.png';
 import '../../app/styles/PlantList.scss';
 import { StaticImageData } from 'next/image';
 
-export interface PlantType {
+export interface Plant {
   id: number;
   title: string;
   image: StaticImageData;
   description: string;
   price: number;
 }
-const plants = [
+const plants: Plant[] = [
   {
     id: 0,
     title: 'Rose',
@@ -80,14 +80,8 @@ const plants = [
 export default function PlantList() {
   return (
     <div className="list-position">
-      {plants.map((plant: PlantType) => (
-        <PlantItem
-          id={plant.id}
-          title={plant.title}
-          image={plant.image}
-          description={plant.description}
-          price={plant.price}
-        />
+      {plants.map((plant: Plant) => (
+        <PlantItem key={plant.id} plant={plant} />
       ))}
     </div>
   );

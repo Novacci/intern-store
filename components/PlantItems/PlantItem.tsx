@@ -1,16 +1,13 @@
 import React from 'react';
 import '../../app/styles/PlantItem.scss';
 import Image from 'next/image';
-import Rose from '../../public/images/flowers/Rose.png';
-import { PlantType } from './PlantList';
+import { Plant } from './PlantList';
 
-export default function PlantItem({
-  id,
-  title,
-  image,
-  description,
-  price,
-}: PlantType) {
+type PlantItemProps = {
+  plant: Plant;
+};
+export default function PlantItem({ plant }: PlantItemProps) {
+  const { image, title, description, price } = plant;
   return (
     <div className="item-container">
       <Image src={image} width={180} height={160} alt="plant pic" />
