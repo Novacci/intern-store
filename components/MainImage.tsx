@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-
+import { motion, AnimatePresence } from 'framer-motion';
+import '../app/styles/MainImage.scss';
 import Image from 'next/image';
 import worker from '../public/images/main-page-imgs/worker-flowers.jpg';
 import admirer from '../public/images/main-page-imgs/admiring flowers.jpg';
@@ -16,14 +17,21 @@ export default function MainImage() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentImage(images[Math.floor(Math.random() * images.length)]);
-    }, 5000);
+    }, 1000);
 
     return () => clearInterval(intervalId);
   }, []);
 
   return (
-    <div>
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, y: 100 },
+        visible: { opacity: 1, y: 0 },
+      }}
+      initial="hidden"
+      animate="visible"
+    >
       <Image width={884} height={340} src={currentImage} alt="garden" />
-    </div>
+    </motion.div>
   );
 }

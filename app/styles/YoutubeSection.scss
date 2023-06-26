@@ -9,10 +9,14 @@ $green: rgb(0, 193, 137);
   flex-direction: column;
   align-items: center;
   width: 100%;
+  .sub-position {
+    margin-top: 3rem;
+  }
 
   h2 {
     color: $green;
-    padding: 3rem 0rem;
+    padding-top: 16rem;
+    padding-bottom: 3rem;
     margin: 0;
   }
   iframe {
