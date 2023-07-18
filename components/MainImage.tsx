@@ -24,12 +24,9 @@ export default function MainImage() {
 
   return (
     <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 100 },
-        visible: { opacity: 1, y: 0 },
-      }}
-      initial="hidden"
-      animate="visible"
+      initial={{ opacity: 0, y: 100 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
     >
       <Image width={884} height={340} src={currentImage} alt="garden" />
     </motion.div>
