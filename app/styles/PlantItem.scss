@@ -15,6 +15,7 @@ $font-stack: itc-avant-garde-gothic-pro, sans-serif;
   border: none;
   font-weight: bold;
   transition: transform 0.2s;
+  cursor: pointer;
   &:hover {
     transform: scale(1.1);
   }
