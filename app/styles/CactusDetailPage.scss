@@ -1,0 +1,36 @@
+$font-stack: itc-avant-garde-gothic-pro, sans-serif;
+
+.main-section {
+  font-family: $font-stack;
+  padding-top: 1.5rem;
+  display: flex;
+  .cactus-info {
+    .cactus-title {
+      font-weight: bold;
+      font-size: 1.75rem;
+    }
+    width: 100%;
+
+    padding-left: 1rem;
+    .title-border {
+      border-bottom: 1px solid #9e9e9e;
+      border-bottom-width: 100%;
+      padding-bottom: 0.25rem;
+    }
+    .size-style {
+      display: block;
+      font-weight: bold;
+      padding-top: 0.25rem;
+    }
+    .size-icon-style {
+      background-color: #f3f4f3;
+
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
