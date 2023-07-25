@@ -33,9 +33,6 @@ export default function CactusList() {
       {cactuses.map((cactus: Cactus) => (
         <CactusItem key={cactus.id} cactus={cactus} />
       ))}
-      {/* {cactuses.map((cactus: Cactus) => (
-        <h1>{cactus.id}</h1>
-      ))} */}
     </div>
   );
 }

@@ -1,10 +1,18 @@
 import CactusDetailPage from '@/components/CactusItems/CactusDetailPage';
 import React from 'react';
 
-export default function page() {
+interface PageParams {
+  params: {
+    cactusId: string;
+  };
+}
+
+export default function page({ params }: PageParams) {
+  const cactusUrl = params.cactusId;
+
   return (
     <div>
-      <CactusDetailPage />
+      <CactusDetailPage cactusId={cactusUrl} />
     </div>
   );
 }
