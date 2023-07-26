@@ -22,6 +22,7 @@ export interface Cactus {
 export default function CactusDetailPage(props: CactusDetailPageParams) {
   const [cactus, setCactus] = useState<Cactus | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
+  const [cardItems, setCardItems] = useState(0);
 
   const docRef = doc(db, 'cactuses', `${props.cactusId}`);
 
@@ -43,6 +44,13 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
     getCactus();
   }, [props.cactusId]);
 
+  const decrementHandler = () => {
+    setCardItems((prev) => prev - 1);
+  };
+  const incrementHandler = () => {
+    setCardItems((prev) => prev + 1);
+  };
+
   return (
     <>
       {isLoading ? (
@@ -63,11 +71,17 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
                 <span className="order-title-cactus">{cactus.title}</span>
                 <span className="order-price-cactus">{cactus.price}</span>
               </div>
-              <span className="pot-style">in nursery pot</span>
+              <div className=" pot-style-whitespace">
+                <span className="pot-style">in nursery pot</span>
+              </div>
               <div className="order-features">
-                <button className="remove-cactus">-</button>
-                <span className="cactus-state">1</span>
-                <button className="add-cactus">+</button>
+                <button onClick={decrementHandler} className="remove-cactus">
+                  -
+                </button>
+                <span className="cactus-state">{cardItems}</span>
+                <button onClick={incrementHandler} className="add-cactus">
+                  +
+                </button>
               </div>
             </div>
           </div>

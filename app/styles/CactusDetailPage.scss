@@ -41,10 +41,10 @@ $font-stack: itc-avant-garde-gothic-pro, sans-serif;
     }
     .order-title-cactus {
       font-weight: bold;
-      font-size: 0.8rem;
+      font-size: 1rem;
     }
     .order-price-cactus {
-      font-size: 0.8rem;
+      font-size: 1rem;
       color: #00c189;
       font-weight: 600;
     }
@@ -52,7 +52,9 @@ $font-stack: itc-avant-garde-gothic-pro, sans-serif;
       text-decoration: underline;
       font-size: 0.7rem;
       cursor: pointer;
-      margin: 1rem 0;
+    }
+    .pot-style-whitespace {
+      margin: 0.75rem 0;
     }
     .remove-cactus {
       background-color: #f3f4f3;
@@ -62,6 +64,12 @@ $font-stack: itc-avant-garde-gothic-pro, sans-serif;
       width: 2rem;
       height: 2rem;
       text-align: center;
+      cursor: pointer;
+      transition: 0.5s ease;
+      &:hover {
+        color: white;
+        background-color: #00c189;
+      }
     }
     .add-cactus {
       background-color: #f3f4f3;
@@ -71,6 +79,12 @@ $font-stack: itc-avant-garde-gothic-pro, sans-serif;
       text-align: center;
       width: 2rem;
       height: 2rem;
+      cursor: pointer;
+      transition: 0.5s ease;
+      &:hover {
+        color: white;
+        background-color: #00c189;
+      }
     }
     .cactus-state {
       font-size: 0.9rem;
