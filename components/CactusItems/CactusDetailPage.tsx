@@ -22,7 +22,8 @@ export interface Cactus {
 export default function CactusDetailPage(props: CactusDetailPageParams) {
   const [cactus, setCactus] = useState<Cactus | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
-  const [cardItems, setCardItems] = useState(0);
+  const [cardItems, setCardItems] = useState(1);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const docRef = doc(db, 'cactuses', `${props.cactusId}`);
 
@@ -31,7 +32,10 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
       try {
         const data = await getDoc(docRef);
         if (data.exists()) {
-          setCactus({ ...(data.data() as Cactus) });
+          const fetchedCactus = { ...(data.data() as Cactus) };
+          setCactus(fetchedCactus);
+
+          setTotalPrice(cardItems * fetchedCactus.price);
         } else {
           console.error('Cactus not found.');
         }
@@ -43,6 +47,12 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
     };
     getCactus();
   }, [props.cactusId]);
+
+  useEffect(() => {
+    if (cactus !== undefined) {
+      setTotalPrice(cardItems * cactus.price);
+    }
+  }, [cardItems]);
 
   const decrementHandler = () => {
     setCardItems((prev) => prev - 1);
@@ -58,6 +68,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
       ) : (
         cactus && (
           <div className="main-section">
+            +
             <Image width={380} height={480} src={cactus.image} alt="garden" />
             <div className="cactus-info">
               <div className="title-border">
@@ -74,14 +85,20 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
               <div className=" pot-style-whitespace">
                 <span className="pot-style">in nursery pot</span>
               </div>
-              <div className="order-features">
-                <button onClick={decrementHandler} className="remove-cactus">
-                  -
-                </button>
-                <span className="cactus-state">{cardItems}</span>
-                <button onClick={incrementHandler} className="add-cactus">
-                  +
-                </button>
+              <div className="title-border">
+                <div className="order-features">
+                  <button onClick={decrementHandler} className="remove-cactus">
+                    -
+                  </button>
+                  <span className="cactus-state">{cardItems}</span>
+                  <button onClick={incrementHandler} className="add-cactus">
+                    +
+                  </button>
+                </div>
+              </div>
+              <div className="total-price-section">
+                <span>Total:</span>
+                <span>{totalPrice}</span>
               </div>
             </div>
           </div>

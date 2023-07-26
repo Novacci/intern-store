@@ -94,7 +94,13 @@ $font-stack: itc-avant-garde-gothic-pro, sans-serif;
       display: flex;
       justify-content: space-between;
       align-items: center;
+
       width: 40%;
+    }
+    .total-price-section {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
     }
   }
 }
