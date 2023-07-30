@@ -101,6 +101,36 @@ $font-stack: itc-avant-garde-gothic-pro, sans-serif;
       display: flex;
       justify-content: space-between;
       font-weight: bold;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #9e9e9e;
+      border-bottom-width: 100%;
+    }
+    .cart-section {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin: 0.5rem 0;
+      .heart-icon {
+        font-size: 1.5rem;
+        margin-right: 0.5rem;
+      }
+      .button-card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #00c189;
+        color: white;
+        padding: 8px 20px;
+        border-radius: 9999px;
+        border: none;
+        cursor: pointer;
+        span {
+          margin-left: 0.5rem;
+        }
+        svg {
+          font-size: 1rem;
+        }
+      }
     }
   }
 }

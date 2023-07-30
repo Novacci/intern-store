@@ -8,6 +8,8 @@ import { StaticImageData } from 'next/image';
 import Image from 'next/image';
 import '@/app/styles/CactusDetailPage.scss';
 import LoadingIndicator from '../LoadingIndicator';
+import { CiHeart } from 'react-icons/ci';
+import { PiShoppingCartLight } from 'react-icons/pi';
 
 interface CactusDetailPageParams {
   cactusId: string;
@@ -68,7 +70,6 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
       ) : (
         cactus && (
           <div className="main-section">
-            +
             <Image width={380} height={480} src={cactus.image} alt="garden" />
             <div className="cactus-info">
               <div className="title-border">
@@ -99,6 +100,15 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
               <div className="total-price-section">
                 <span>Total:</span>
                 <span>{totalPrice}</span>
+              </div>
+              <div className="cart-section">
+                <div className="heart-icon">
+                  <CiHeart />
+                </div>
+                <button className="button-card">
+                  <PiShoppingCartLight />
+                  <span>Add to cart</span>
+                </button>
               </div>
             </div>
           </div>
