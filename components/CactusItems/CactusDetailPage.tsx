@@ -10,6 +10,7 @@ import '@/app/styles/CactusDetailPage.scss';
 import LoadingIndicator from '../LoadingIndicator';
 import { CiHeart } from 'react-icons/ci';
 import { PiShoppingCartLight } from 'react-icons/pi';
+import { TiTick } from 'react-icons/ti';
 
 interface CactusDetailPageParams {
   cactusId: string;
@@ -109,6 +110,28 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
                   <PiShoppingCartLight />
                   <span>Add to cart</span>
                 </button>
+              </div>
+              <div className="tick-section">
+                <div>
+                  <TiTick />
+                  <span>
+                    The most
+                    <span className="bolded"> exclusive houseplants</span>
+                  </span>
+                </div>
+                <div>
+                  <TiTick />
+                  <span>
+                    <span className="bolded">250,000+ community </span>
+                    followers
+                  </span>
+                </div>
+                <div>
+                  <TiTick />
+                  <span>
+                    Straight from <span className="bolded"> the nursery</span>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
