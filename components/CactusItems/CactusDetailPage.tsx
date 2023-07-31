@@ -11,10 +11,14 @@ import LoadingIndicator from '../LoadingIndicator';
 import { CiHeart } from 'react-icons/ci';
 import { PiShoppingCartLight } from 'react-icons/pi';
 import { TiTick } from 'react-icons/ti';
+import  width from '@/public/images/main-page-imgs/width.png';
+import height from '@/public/images/main-page-imgs/height.png';
+import cloud from '@/public/images/main-page-imgs/cloud.png'
 
 interface CactusDetailPageParams {
   cactusId: string;
 }
+
 export interface Cactus {
   cactusId: string;
   title: string;
@@ -22,11 +26,19 @@ export interface Cactus {
   description: string;
   price: number;
 }
+
+enum DisplayChoices {
+  Specifications,
+  Care,
+  Reviews 
+}
+
 export default function CactusDetailPage(props: CactusDetailPageParams) {
   const [cactus, setCactus] = useState<Cactus | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
   const [cardItems, setCardItems] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [displayChoice, setDisplayChoice] = useState(DisplayChoices.Specifications);
 
   const docRef = doc(db, 'cactuses', `${props.cactusId}`);
 
@@ -53,7 +65,10 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
 
   useEffect(() => {
     if (cactus !== undefined) {
-      setTotalPrice(cardItems * cactus.price);
+      setTotalPrice(cardItems * Math.floor(cactus.price * 100) / 100);
+    }
+    if (cardItems < 1) {
+      setCardItems(1)
     }
   }, [cardItems]);
 
@@ -71,7 +86,8 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
       ) : (
         cactus && (
           <div className="main-section">
-            <Image width={380} height={480} src={cactus.image} alt="garden" />
+            <Image width={380} height={380} src={cactus.image} alt="garden" />
+
             <div className="cactus-info">
               <div className="title-border">
                 <span className="cactus-title">{cactus.title}</span>
@@ -137,6 +153,54 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
           </div>
         )
       )}
+      <div className="about-section">
+        <div className="first-about-section">
+          <div className='links-section'>
+          <button onClick={()=> {setDisplayChoice(DisplayChoices.Specifications)}}>Specifications</button>
+          <button onClick={()=> {setDisplayChoice(DisplayChoices.Care)}}>Care</button>
+          <button onClick={()=> {setDisplayChoice(DisplayChoices.Reviews)}}>Reviews</button>
+          </div>
+          <div className='active-section'>
+          {DisplayChoices.Specifications === displayChoice && <div className='spec-section'>
+            <div>
+            <Image src={width} height={60} width={60} alt="diameter" />
+            <div className='spec-descriptions'>
+            <span className='bolded-text'>Diameter</span>
+              <span>14cm</span>
+              </div>
+              </div>
+           <div>  <Image src={height} height={60} width={60} alt="height" /> 
+           <div className='spec-descriptions'>
+           <span className='bolded-text'>Height</span>
+                <span>±18cm</span>
+                </div>
+                </div>
+                <div> <Image src={cloud} height={60} width={60} alt="cloud" />   
+                 <div className='spec-descriptions'>  
+                  <span className='bolded-text'>Loves</span>
+                  <span>Partly shady</span></div>  </div>
+            </div>
+            
+            }
+          {DisplayChoices.Care === displayChoice && <span>  Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ised in the 1960s with the release of Letraset sheets containing
+            Lorem Ipsum passages, and more recently with desktop publishing
+            software like Aldus PageMaker including versions of Lorem Ipsum.</span>}
+          {DisplayChoices.Reviews === displayChoice && <span>There are no reviews to display.</span>}
+          </div>
+        </div>
+        <div className="second-about-section">
+          <span className="bolded">About this plant</span>
+          <span className="text-style">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ised in the 1960s with the release of Letraset sheets containing
+            Lorem Ipsum passages, and more recently with desktop publishing
+            software like Aldus PageMaker including versions of Lorem Ipsum.
+          </span>
+        </div>
+      </div>
     </>
   );
 }
