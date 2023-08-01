@@ -3,7 +3,7 @@
 import '../app/styles/MidBar.scss';
 import SelectCurrency from './SelectCurrency';
 import Login from './Login';
-import Cart from './Cart';
+import Cart from './Cart/Cart';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 

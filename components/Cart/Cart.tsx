@@ -1,9 +1,9 @@
 import React from 'react';
-import cart from '../public/images/icons/cart.svg';
+import cart from '@/public/images/icons/cart.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import '../app/styles/Cart.scss';
+import '@/app/styles/Cart.scss';
 
 export default function Cart() {
   const [cartValue, setCartValue] = useState(0);

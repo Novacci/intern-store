@@ -14,6 +14,7 @@ import { TiTick } from 'react-icons/ti';
 import width from '@/public/images/main-page-imgs/width.png';
 import height from '@/public/images/main-page-imgs/height.png';
 import cloud from '@/public/images/main-page-imgs/cloud.png';
+import CartModal from '../Cart/CartModal';
 
 interface CactusDetailPageParams {
   cactusId: string;
@@ -38,7 +39,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
   const [isLoading, setIsLoading] = useState(true);
   const [cardItems, setCardItems] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [showCartModal, setShowCartModal] = useState(false);
+  const [showCartModal, setShowCartModal] = useState(true);
   const [displayChoice, setDisplayChoice] = useState(
     DisplayChoices.Specifications
   );
@@ -237,6 +238,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
           </span>
         </div>
       </div>
+      {showCartModal && <CartModal />}
     </>
   );
 }
