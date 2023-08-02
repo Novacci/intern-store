@@ -3,7 +3,7 @@ import React from 'react';
 export default function Home() {
   return (
     <div>
-      <h2>about us</h2>
+      <h2 className="divide-red-500">about us</h2>
       <p>
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's standard dummy text ever
@@ -48,6 +48,9 @@ export default function Home() {
         with desktop publishing software like Aldus PageMaker including versions
         of Lorem Ipsum.
       </p>
+      <h1 className="text-3xl font-bold underline text-red-600">
+        Hello world!
+      </h1>
     </div>
   );
 }
