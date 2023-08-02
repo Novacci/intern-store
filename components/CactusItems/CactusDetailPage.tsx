@@ -37,7 +37,7 @@ enum DisplayChoices {
 export default function CactusDetailPage(props: CactusDetailPageParams) {
   const [cactus, setCactus] = useState<Cactus | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
-  const [cardItems, setCardItems] = useState(1);
+  const [cartItems, setCartItems] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
   const [showCartModal, setShowCartModal] = useState(true);
   const [displayChoice, setDisplayChoice] = useState(
@@ -54,7 +54,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
           const fetchedCactus = { ...(data.data() as Cactus) };
           setCactus(fetchedCactus);
 
-          setTotalPrice(cardItems * fetchedCactus.price);
+          setTotalPrice(cartItems * fetchedCactus.price);
         } else {
           console.error('Cactus not found.');
         }
@@ -69,18 +69,18 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
 
   useEffect(() => {
     if (cactus !== undefined) {
-      setTotalPrice((cardItems * Math.floor(cactus.price * 100)) / 100);
+      setTotalPrice((cartItems * Math.floor(cactus.price * 100)) / 100);
     }
-    if (cardItems < 1) {
-      setCardItems(1);
+    if (cartItems < 1) {
+      setCartItems(1);
     }
-  }, [cardItems]);
+  }, [cartItems]);
 
   const decrementHandler = () => {
-    setCardItems((prev) => prev - 1);
+    setCartItems((prev) => prev - 1);
   };
   const incrementHandler = () => {
-    setCardItems((prev) => prev + 1);
+    setCartItems((prev) => prev + 1);
   };
 
   const showShoppingCartSumUp = () => {
@@ -116,7 +116,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
                   <button onClick={decrementHandler} className="remove-cactus">
                     -
                   </button>
-                  <span className="cactus-state">{cardItems}</span>
+                  <span className="cactus-state">{cartItems}</span>
                   <button onClick={incrementHandler} className="add-cactus">
                     +
                   </button>
@@ -238,7 +238,15 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
           </span>
         </div>
       </div>
-      {showCartModal && <CartModal />}
+      {showCartModal && (
+        <CartModal
+          decrementHandler={decrementHandler}
+          incrementHandler={incrementHandler}
+          productImage={cactus?.image}
+          cartItems={cartItems}
+          totalPrice={totalPrice}
+        />
+      )}
     </>
   );
 }

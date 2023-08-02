@@ -3,8 +3,8 @@
   top: 0;
   right: 0;
   z-index: 100;
-  width: 390px;
-  padding: 36px;
+  width: 340px;
+  padding: 48px;
   height: 100%;
   background-color: antiquewhite;
   .title-position {
@@ -20,9 +20,6 @@
   .order-price-info {
     display: flex;
     gap: 0.5rem;
-    // border-bottom: 8px solid #00c189;
-    // border-top-right-radius: 8px;
-    // border-bottom-right-radius: 8px;
 
     svg {
       color: #00c189;
@@ -47,5 +44,29 @@
     background: #00c189;
     height: 10px;
     border-radius: 10px 10px 10px 10px;
+  }
+  .single-order {
+    display: flex;
+    flex-direction: row;
+    .single-order-section {
+      display: flex;
+      flex-direction: column;
+
+      justify-content: space-between;
+      width: 100%;
+      .test2 {
+        display: flex;
+        flex-direction: column;
+      }
+      .test1 {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+      }
+      svg {
+        font-size: 1.25rem;
+        cursor: pointer;
+      }
+    }
   }
 }
