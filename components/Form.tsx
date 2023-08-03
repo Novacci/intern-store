@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import '../app/styles/Form.scss';
 
 export default function Form() {
   const {
@@ -17,11 +16,19 @@ export default function Form() {
   console.log(errors);
   return (
     <>
-      <div className="form-container">
-        <h2>contact us</h2>
-        <form className="form-style" onSubmit={handleSubmit(onSubmit)}>
+      <div className="w-[480px] h-[750px] m-auto pt-12">
+        <h2
+          className="text-center text-[rgb(64,54,54)] font-normal opacity-80 pb-8
+  font-family: itc-avant-garde-gothic-pro, sans-serif"
+        >
+          contact us
+        </h2>
+        <form
+          className="flex flex-col items-center gap-4"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <input
-            className="input-style"
+            className="focus:outline-none bg-[rgba(34,34,34,0.1)] w-full text-[black] px-5 py-[15px] rounded-[50px] border-[none]"
             type="text"
             {...register('name', {
               required: 'Name is required.',
@@ -33,13 +40,13 @@ export default function Form() {
             placeholder="name"
           />
           {errors.name && errors.name.type === 'required' && (
-            <p className="errorMsg">Name is required.</p>
+            <p className="text-[red]">Name is required.</p>
           )}
           {errors.name && errors.name.type === 'minLength' && (
-            <p className="errorMsg">Name should be at-least 3 characters.</p>
+            <p className="text-[red]">Name should be at-least 3 characters.</p>
           )}
           <input
-            className="input-style"
+            className="focus:outline-none bg-[rgba(34,34,34,0.1)] w-full text-[black] px-5 py-[15px] rounded-[50px] border-[none]"
             type="email"
             {...register('email', {
               required: 'Email is required.',
@@ -48,13 +55,13 @@ export default function Form() {
             placeholder="email"
           />
           {errors.email && errors.email.type === 'required' && (
-            <p className="errorMsg">Email is required.</p>
+            <p className="text-[red]">Email is required.</p>
           )}
           {errors.email && errors.email.type === 'pattern' && (
-            <p className="errorMsg">Email is not valid.</p>
+            <p className="text-[red]">Email is not valid.</p>
           )}
           <input
-            className="input-style"
+            className="focus:outline-none bg-[rgba(34,34,34,0.1)] w-full text-[black] px-5 py-[15px] rounded-[50px] border-[none]"
             type="text"
             {...register('title', {
               required: 'Title is required.',
@@ -66,13 +73,14 @@ export default function Form() {
             placeholder="title"
           />
           {errors.title && errors.title.type === 'required' && (
-            <p className="errorMsg">Title is required.</p>
+            <p className="text-[red]">Title is required.</p>
           )}
           {errors.title && errors.title.type === 'minLength' && (
-            <p className="errorMsg">Title should be at-least 1 characters.</p>
+            <p className="text-[red]">Title should be at-least 1 characters.</p>
           )}
           <input
-            className="input-text-style"
+            className="focus:outline-none bg-[rgba(34,34,34,0.1)] w-full text-[black] h-60 px-5 py-[15px] rounded-[20px] border-[none]
+            outline: none"
             type="text"
             {...register('text', {
               required: true,
@@ -84,14 +92,16 @@ export default function Form() {
             placeholder="text"
           />
           {errors.text && errors.text.type === 'required' && (
-            <p className="errorMsg">Do not send empty messages, please.</p>
+            <p className="text-[red]">Do not send empty messages, please.</p>
           )}
           {errors.text && errors.text.type === 'maxLength' && (
-            <p className="errorMsg">
+            <p className="text-[red]">
               Max length for message is 300 characters.
             </p>
           )}
-          <input type="submit" />
+          <button className='className="no-underline m-12 px-5 py-[22px] border-2 border-solid border-[rgb(0,193,137)] hover:bg-[rgb(0,193,137)] hover:text-[white] transition-colors duration-500 ease-in-out'>
+            SEND EMAIL
+          </button>
         </form>
       </div>
     </>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import '../app/styles/MainImage.scss';
 import Image from 'next/image';
 import worker from '../public/images/main-page-imgs/worker-flowers.jpg';

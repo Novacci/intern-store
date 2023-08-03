@@ -11,21 +11,14 @@ export default function Footer() {
       className="flex flex-col items-center text-[rgba(34,34,34,0.4)] mt-12
     font-family: itc-avant-garde-gothic-pro, sans-serif"
     >
-      <div>
+      <div className="flex gap-3">
         <Link
           className="no-underline text-[rgba(34,34,34,0.4)] cursor-pointer "
           rel="noreferrer"
           target="_blank"
           href="https://www.facebook.com/"
         >
-          <Image
-            width={12.5}
-            height={20}
-            src={facebook}
-            alt="facebook_icon"
-            className="px-8 py-0"
-          />
-          d
+          <Image width={12.5} height={20} src={facebook} alt="facebook_icon" />
         </Link>
         <Link
           className="no-underline text-[rgba(34,34,34,0.4)] cursor-pointer"
@@ -38,9 +31,7 @@ export default function Footer() {
             height={20}
             src={instagram}
             alt="instagram_icon"
-            className="px-8 py-0 "
           />
-          c
         </Link>
         <Link
           className="no-underline text-[rgba(34,34,34,0.4)] cursor-pointer"
@@ -48,15 +39,7 @@ export default function Footer() {
           target="_blank"
           href="https://www.youtube.com/"
         >
-          b
-          <Image
-            width={22.5}
-            height={20}
-            src={youtube}
-            alt="youtube_icon"
-            className="px-8 py-0"
-          />
-          a
+          <Image width={22.5} height={20} src={youtube} alt="youtube_icon" />
         </Link>
       </div>
       <div className="flex flex-col items-center mx-0 my-12">
