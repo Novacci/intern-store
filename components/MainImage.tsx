@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import '../app/styles/MainImage.scss';
 import Image from 'next/image';
 import worker from '../public/images/main-page-imgs/worker-flowers.jpg';
 import admirer from '../public/images/main-page-imgs/admiring flowers.jpg';

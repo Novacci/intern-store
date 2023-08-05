@@ -1,6 +1,5 @@
 'use client';
 
-import '../../app/styles/CactusList.scss';
 import { StaticImageData } from 'next/image';
 import CactusItem from './CactusItem';
 import { useState, useEffect } from 'react';
@@ -29,7 +28,7 @@ export default function CactusList() {
   }, []);
 
   return (
-    <div className="list-position">
+    <div className="flex gap-12 flex-wrap relative justify-center top-12">
       {cactuses.map((cactus: Cactus) => (
         <CactusItem key={cactus.id} cactus={cactus} />
       ))}
