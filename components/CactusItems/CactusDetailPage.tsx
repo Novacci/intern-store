@@ -1,6 +1,5 @@
 'use client';
 import React from 'react';
-import '../../app/styles/CactusDetailPage.scss';
 import { getDoc, doc } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 import { db } from '../../app/firebase';
@@ -39,7 +38,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
   const [isLoading, setIsLoading] = useState(true);
   const [cartItems, setCartItems] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [showCartModal, setShowCartModal] = useState(true);
+  const [showCartModal, setShowCartModal] = useState(false);
   const [displayChoice, setDisplayChoice] = useState(
     DisplayChoices.Specifications
   );
@@ -93,67 +92,83 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
         <LoadingIndicator />
       ) : (
         cactus && (
-          <div className="main-section">
+          <div className="flex pt-6 font-family: itc-avant-garde-gothic-pro">
             <Image width={380} height={380} src={cactus.image} alt="garden" />
 
-            <div className="cactus-info">
-              <div className="title-border">
-                <span className="cactus-title">{cactus.title}</span>
+            <div className="w-full pl-4">
+              <div className="pb-1 border-b-[#9e9e9e] border-b-[100%] border-b border-solid">
+                <span className="font-bold text-[1.75rem]">{cactus.title}</span>
               </div>
-              <div className="title-border">
-                <span className="size-style">Size</span>
-                <span className="size-icon-style">S</span>
+              <div className="pb-1 border-b-[#9e9e9e] border-b-[100%] border-b border-solid">
+                <span className="block font-bold text-[0.8rem] pt-1">Size</span>
+                <span className="bg-[#f3f4f3] w-10 h-10 flex justify-center items-center cursor-pointer mx-0 my-1 rounded-[50%]">
+                  S
+                </span>
               </div>
-              <div className="order-space">
-                <span className="order-title-cactus">{cactus.title}</span>
-                <span className="order-price-cactus">{cactus.price}</span>
+              <div className="flex justify-between mt-1">
+                <span className="font-bold text-base">{cactus.title}</span>
+                <span className="text-base text-[#00c189] font-semibold">
+                  {cactus.price}
+                </span>
               </div>
-              <div className=" pot-style-whitespace">
-                <span className="pot-style">in nursery pot</span>
+              <div className="mx-0 my-3">
+                <span className="underline text-[0.7rem] cursor-pointer">
+                  in nursery pot
+                </span>
               </div>
-              <div className="title-border">
-                <div className="order-features">
-                  <button onClick={decrementHandler} className="remove-cactus">
+              <div className="pb-1 border-b-[#9e9e9e] border-b-[100%] border-b border-solid">
+                <div className="flex justify-between items-center w-2/5">
+                  <button
+                    onClick={decrementHandler}
+                    className="bg-[#f3f4f3] text-base w-8 h-8 text-center cursor-pointer transition-[0.5s] duration-[ease] rounded-[50%] border-[none] hover:text-[white] hover:bg-[#00c189]"
+                  >
                     -
                   </button>
-                  <span className="cactus-state">{cartItems}</span>
-                  <button onClick={incrementHandler} className="add-cactus">
+                  <span className="text-[0.9rem] font-bold">{cartItems}</span>
+                  <button
+                    onClick={incrementHandler}
+                    className="bg-[#f3f4f3] text-base flex justify-center items-center w-8 h-8 cursor-pointer transition-[0.5s] duration-[ease] rounded-[50%] border-[none] hover:text-[white] hover:bg-[#00c189]"
+                  >
                     +
                   </button>
                 </div>
               </div>
-              <div className="total-price-section">
+              <div className="flex justify-between font-bold px-0 py-2 border-b-[#9e9e9e] border-b-[100%] border-b border-solid">
                 <span>Total:</span>
                 <span>{totalPrice}</span>
               </div>
-              <div className="cart-section">
-                <div className="heart-icon">
+              <div className="flex justify-end items-center mx-0 my-2">
+                <div className="text-2xl transition-[color] duration-[0.5s] ease-[ease] cursor-pointer mr-2 hover:text-[red]">
                   <CiHeart />
                 </div>
-                <button onClick={showShoppingCartSumUp} className="button-card">
-                  <PiShoppingCartLight />
-                  <span>Add to cart</span>
+                <button
+                  onClick={showShoppingCartSumUp}
+                  className="flex justify-center items-center bg-[#00c189] text-[white] cursor-pointer transition-[background-color] duration-[0.5s] ease-[ease] px-5 py-2 rounded-full border-[none] hover:bg-[rgba(0,0,0,0.8)]"
+                >
+                  <PiShoppingCartLight className="text-xl" />
+                  <span className="ml-2">Add to cart</span>
                 </button>
               </div>
-              <div className="tick-section">
-                <div>
-                  <TiTick />
+              <div className="flex flex-col gap-[0.15rem]">
+                <div className="flex items-center">
+                  <TiTick className="text-[#00c189]" />
                   <span>
                     The most
-                    <span className="bolded"> exclusive houseplants</span>
+                    <span className="font-bold"> exclusive houseplants</span>
                   </span>
                 </div>
-                <div>
-                  <TiTick />
+                <div className="flex items-center">
+                  <TiTick className="text-[#00c189]" />
                   <span>
-                    <span className="bolded">250,000+ community </span>
+                    <span className="font-bold">250,000+ community </span>
                     followers
                   </span>
                 </div>
-                <div>
-                  <TiTick />
+                <div className="flex items-center">
+                  <TiTick className="text-[#00c189]" />
                   <span>
-                    Straight from <span className="bolded"> the nursery</span>
+                    Straight from
+                    <span className="font-bold"> the nursery</span>
                   </span>
                 </div>
               </div>
@@ -161,9 +176,9 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
           </div>
         )
       )}
-      <div className="about-section">
-        <div className="first-about-section">
-          <div className="links-section">
+      <div className="flex w-full mt-4">
+        <div className="w-[43%]">
+          <div className="font-bold pb-8 flex gap-10 h-[1.65rem] text-gray-400 border-b-[#9e9e9e] border-b border-solid">
             <button
               onClick={() => {
                 setDisplayChoice(DisplayChoices.Specifications);
@@ -186,27 +201,27 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
               Reviews
             </button>
           </div>
-          <div className="active-section">
+          <div className="h-auto pt-4">
             {DisplayChoices.Specifications === displayChoice && (
-              <div className="spec-section">
+              <div className="flex gap-10">
                 <div>
                   <Image src={width} height={50} width={50} alt="diameter" />
-                  <div className="spec-descriptions">
-                    <span className="bolded-text">Diameter</span>
+                  <div className="flex flex-col items-center">
+                    <span className="font-bold">Diameter</span>
                     <span>14cm</span>
                   </div>
                 </div>
                 <div>
                   <Image src={height} height={50} width={50} alt="height" />
-                  <div className="spec-descriptions">
-                    <span className="bolded-text">Height</span>
+                  <div className="flex flex-col items-center">
+                    <span className="font-bold">Height</span>
                     <span>±18cm</span>
                   </div>
                 </div>
                 <div>
                   <Image src={cloud} height={50} width={50} alt="cloud" />
-                  <div className="spec-descriptions">
-                    <span className="bolded-text">Loves</span>
+                  <div className="flex flex-col items-center">
+                    <span className="font-bold">Loves</span>
                     <span>Partly shady</span>
                   </div>
                 </div>
@@ -227,9 +242,11 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
             )}
           </div>
         </div>
-        <div className="second-about-section">
-          <span className="bolded">About this plant</span>
-          <span className="text-style">
+        <div className="w-[57%] flex flex-col ml-4">
+          <span className="font-bold pb-2 border-b-[#9e9e9e] border-b border-solid">
+            About this plant
+          </span>
+          <span className="pt-4">
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard dummy text
             ised in the 1960s with the release of Letraset sheets containing
