@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer';
 import React from 'react';
 
 export default function Home() {
@@ -48,6 +49,7 @@ export default function Home() {
         with desktop publishing software like Aldus PageMaker including versions
         of Lorem Ipsum.
       </p>
+      <Footer />
     </div>
   );
 }

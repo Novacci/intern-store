@@ -38,7 +38,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
   const [isLoading, setIsLoading] = useState(true);
   const [cartItems, setCartItems] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [showCartModal, setShowCartModal] = useState(false);
+  const [showCartModal, setShowCartModal] = useState(true);
   const [displayChoice, setDisplayChoice] = useState(
     DisplayChoices.Specifications
   );
@@ -92,7 +92,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
         <LoadingIndicator />
       ) : (
         cactus && (
-          <div className="flex pt-6 font-family: itc-avant-garde-gothic-pro">
+          <div className="flex pt-6 font-sans">
             <Image width={380} height={380} src={cactus.image} alt="garden" />
 
             <div className="w-full pl-4">

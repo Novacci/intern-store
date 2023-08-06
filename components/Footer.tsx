@@ -9,9 +9,9 @@ export default function Footer() {
   return (
     <footer
       className="flex flex-col items-center text-[rgba(34,34,34,0.4)] mt-12
-    font-family: itc-avant-garde-gothic-pro, sans-serif"
+    "
     >
-      <div className="flex gap-3">
+      <div className="flex gap-4">
         <Link
           className="no-underline text-[rgba(34,34,34,0.4)] cursor-pointer "
           rel="noreferrer"
@@ -42,7 +42,7 @@ export default function Footer() {
           <Image width={22.5} height={20} src={youtube} alt="youtube_icon" />
         </Link>
       </div>
-      <div className="flex flex-col items-center mx-0 my-12">
+      <div className="flex flex-col items-center mx-0 my-8">
         <Link href="/privacy-policy">Privacy Policy</Link>
         <p className="m-0 p-2">Copyright © 2023 Novacci</p>
       </div>
