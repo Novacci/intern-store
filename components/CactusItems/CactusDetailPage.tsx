@@ -25,6 +25,7 @@ export interface Cactus {
   image: StaticImageData;
   description: string;
   price: number;
+  productType: string;
 }
 
 enum DisplayChoices {
@@ -38,7 +39,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
   const [isLoading, setIsLoading] = useState(true);
   const [cartItems, setCartItems] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [showCartModal, setShowCartModal] = useState(true);
+  const [showCartModal, setShowCartModal] = useState(false);
   const [displayChoice, setDisplayChoice] = useState(
     DisplayChoices.Specifications
   );
@@ -263,6 +264,8 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
           cartItems={cartItems}
           totalPrice={totalPrice}
           productPrice={cactus?.price}
+          setShowCardModal={setShowCartModal}
+          productType={cactus?.productType}
         />
       )}
     </>

@@ -7,10 +7,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer
-      className="flex flex-col items-center text-[rgba(34,34,34,0.4)] mt-12
-    "
-    >
+    <footer className="flex flex-col items-center text-[rgba(34,34,34,0.4)] pt-8 mt-12">
       <div className="flex gap-4">
         <Link
           className="no-underline text-[rgba(34,34,34,0.4)] cursor-pointer "

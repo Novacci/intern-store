@@ -18,7 +18,7 @@ export default function CactusItem({ cactus }: CactusItemProps) {
   return (
     <button
       onClick={navigateToDetailPage}
-      className="flex flex-col items-center gap-[0.6rem] text-center w-[260px] h-[440px] shadow-[0px_0px_24px_-11px_rgba(0,0,2,1)] cursor-pointer font-[bold] transition-transform duration-[0.3s] border-[none] hover:scale-110"
+      className="flex flex-col items-center gap-[0.6rem] text-center w-[260px] h-[440px] shadow-[0px_0px_24px_-11px_rgba(0,0,2,1)] cursor-pointer font-bold transition-transform duration-[0.3s] border-[none] hover:scale-110"
     >
       <Image
         src={image}

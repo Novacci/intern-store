@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import { TiTick } from 'react-icons/ti';
 import { StaticImageData } from 'next/image';
@@ -14,6 +14,8 @@ interface Product {
   cartItems: number;
   totalPrice: number;
   productPrice?: number;
+  setShowCardModal: Dispatch<SetStateAction<boolean>>;
+  productType?: string;
 }
 
 export default function CartModal(props: Product) {
@@ -24,13 +26,20 @@ export default function CartModal(props: Product) {
     incrementHandler,
     decrementHandler,
     productPrice,
+    setShowCardModal,
+    productType,
   } = props;
 
   return (
     <div className="fixed z-10 w-[400px] h-full bg-[#ffffff] px-9 py-0 pt-9 right-0 top-0">
       <div className="flex items-center justify-between font-bold">
         <span>Hi! This is your shopping cart</span>
-        <RxCross2 className="cursor-pointer text-2xl" />
+        <RxCross2
+          onClick={() => {
+            setShowCardModal(false);
+          }}
+          className="cursor-pointer text-2xl"
+        />
       </div>
       <div className="flex items-center gap-2">
         <span className="text-[0.9rem] px-0 py-2">Your order ships free!</span>
@@ -54,7 +63,11 @@ export default function CartModal(props: Product) {
           <div className="flex w-full justify-between">
             <div className="flex flex-col">
               <span className="font-bold">Adansonii Aurea</span>
-              <span> Cactus</span>
+              {productType && (
+                <span>
+                  {productType.charAt(0).toUpperCase() + productType.slice(1)}
+                </span>
+              )}
             </div>
             <HiOutlineTrash className="text-xl cursor-pointer" />
           </div>
@@ -96,7 +109,12 @@ export default function CartModal(props: Product) {
         <button className="rounded-full bg-[#00c189] my-2 text-white py-2 px-6 hover:bg-opacity-70 transition-all duration-300">
           I'm ready to order
         </button>
-        <button className="rounded-full border-solid border-black mb-6 border py-2 px-6 hover:text-white hover:bg-black transition-all duration-300">
+        <button
+          onClick={() => {
+            setShowCardModal(false);
+          }}
+          className="rounded-full border-solid border-black mb-6 border py-2 px-6 hover:text-white hover:bg-black transition-all duration-300"
+        >
           Continue shopping
         </button>
       </div>
