@@ -28,10 +28,12 @@ export default function CactusItem({ cactus }: CactusItemProps) {
         className="mt-2 rounded-2xl"
       />
       <h2 className="uppercase m-0">{title}</h2>
-      <span className="text-[rgba(7,7,7,0.4)] text-[0.9rem]">
+      <span className="text-[rgba(7,7,7,0.4)] font-bold text-[0.9rem]">
         {description}
       </span>
-      <span className="text-[rgb(216,13,13)] text-[2rem]">{price}</span>
+      <span className="text-[rgb(216,13,13)] font-bold text-[2rem]">
+        {price}
+      </span>
     </button>
   );
 }

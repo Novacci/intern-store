@@ -13,6 +13,7 @@ interface Product {
   decrementHandler: () => void;
   cartItems: number;
   totalPrice: number;
+  productPrice?: number;
 }
 
 export default function CartModal(props: Product) {
@@ -22,10 +23,11 @@ export default function CartModal(props: Product) {
     totalPrice,
     incrementHandler,
     decrementHandler,
+    productPrice,
   } = props;
 
   return (
-    <div className="fixed z-10 w-[400px] h-full bg-[antiquewhite] px-9 py-0 pt-9 right-0 top-0">
+    <div className="fixed z-10 w-[400px] h-full bg-[#ffffff] px-9 py-0 pt-9 right-0 top-0">
       <div className="flex items-center justify-between font-bold">
         <span>Hi! This is your shopping cart</span>
         <RxCross2 className="cursor-pointer text-2xl" />
@@ -72,9 +74,31 @@ export default function CartModal(props: Product) {
                 +
               </button>
             </div>
-            <div className="font-bold text-[#00c189]">{totalPrice}</div>
+            {productPrice && (
+              <div className="font-bold text-[#00c189]">{productPrice}</div>
+            )}
           </div>
         </div>
+      </div>
+      <div className="flex">
+        <span className="w-full text-sm pb-1 border-b-[#9e9e9e] border-b-[100%] border-b border-solid">
+          The items in your shopping cart are not reserved!
+        </span>
+      </div>
+      <div className="flex py-3 justify-between font-bold text-sm  border-b-[#9e9e9e] border-b-[100%] border-b border-solid">
+        <span>
+          Total
+          <span className="font-bold text-[#7E8784]"> (including VAT)</span>
+        </span>
+        <span className="font-bold text-[#00c189]">{totalPrice}</span>
+      </div>
+      <div className="flex flex-col h-20">
+        <button className="rounded-full bg-[#00c189] my-2 text-white py-2 px-6 hover:bg-opacity-70 transition-all duration-300">
+          I'm ready to order
+        </button>
+        <button className="rounded-full border-solid border-black mb-6 border py-2 px-6 hover:text-white hover:bg-black transition-all duration-300">
+          Continue shopping
+        </button>
       </div>
     </div>
   );

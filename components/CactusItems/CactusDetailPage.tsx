@@ -262,6 +262,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
           productImage={cactus?.image}
           cartItems={cartItems}
           totalPrice={totalPrice}
+          productPrice={cactus?.price}
         />
       )}
     </>
