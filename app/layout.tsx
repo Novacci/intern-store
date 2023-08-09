@@ -1,7 +1,6 @@
 import './globals.scss';
 import React from 'react';
 import Navbar from '@/components/Navbar';
-import '../app/styles/Navbar.scss';
 
 export const metadata = {
   title: 'Next.js',

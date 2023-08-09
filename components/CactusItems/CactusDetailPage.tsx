@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 import { db } from '../../app/firebase';
 import { StaticImageData } from 'next/image';
 import Image from 'next/image';
-import '@/app/styles/CactusDetailPage.scss';
 import LoadingIndicator from '../LoadingIndicator';
 import { CiHeart } from 'react-icons/ci';
 import { PiShoppingCartLight } from 'react-icons/pi';
@@ -36,6 +35,7 @@ enum DisplayChoices {
 
 export default function CactusDetailPage(props: CactusDetailPageParams) {
   const [cactus, setCactus] = useState<Cactus | undefined>(undefined);
+  const [cactusList, setCactusList] = useState<any>([]); //! ANY type
   const [isLoading, setIsLoading] = useState(true);
   const [cartItems, setCartItems] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -85,6 +85,12 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
 
   const showShoppingCartSumUp = () => {
     setShowCartModal(true);
+  };
+
+  const addToCartList = () => {
+    setCactusList((prev: any) => {
+      return [...prev, cactusList];
+    });
   };
 
   return (
@@ -143,7 +149,10 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
                   <CiHeart />
                 </div>
                 <button
-                  onClick={showShoppingCartSumUp}
+                  onClick={() => {
+                    showShoppingCartSumUp();
+                    addToCartList();
+                  }}
                   className="flex justify-center items-center bg-[#00c189] text-[white] cursor-pointer transition-[background-color] duration-[0.5s] ease-[ease] px-5 py-2 rounded-full border-[none] hover:bg-[rgba(0,0,0,0.8)]"
                 >
                   <PiShoppingCartLight className="text-xl" />
@@ -202,6 +211,9 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
               Reviews
             </button>
           </div>
+          {/* {cactusList.map((product: any) => (
+            <div>{product.name}</div>
+          ))} */}
           <div className="h-auto pt-4">
             {DisplayChoices.Specifications === displayChoice && (
               <div className="flex gap-10">
