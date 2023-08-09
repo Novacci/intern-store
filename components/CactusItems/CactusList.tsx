@@ -26,7 +26,7 @@ export default function CactusList() {
     };
     getCactus();
   }, []);
-
+  console.log(cactuses);
   return (
     <div className="flex gap-12 flex-wrap relative justify-center top-12">
       {cactuses.map((cactus: Cactus) => (

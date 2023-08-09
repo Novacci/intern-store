@@ -13,6 +13,7 @@ import width from '@/public/images/main-page-imgs/width.png';
 import height from '@/public/images/main-page-imgs/height.png';
 import cloud from '@/public/images/main-page-imgs/cloud.png';
 import CartModal from '../Cart/CartModal';
+import { formatCurrency } from '@/app/utilities/formatCurrency';
 
 interface CactusDetailPageParams {
   cactusId: string;
@@ -35,9 +36,9 @@ enum DisplayChoices {
 
 export default function CactusDetailPage(props: CactusDetailPageParams) {
   const [cactus, setCactus] = useState<Cactus | undefined>(undefined);
-  const [cactusList, setCactusList] = useState<any>([]); //! ANY type
+  const [cactusList, setCactusList] = useState<any[]>([]); //! ANY type
   const [isLoading, setIsLoading] = useState(true);
-  const [cartItems, setCartItems] = useState(1);
+  const [quantity, setQuantity] = useState(8);
   const [totalPrice, setTotalPrice] = useState(0);
   const [showCartModal, setShowCartModal] = useState(false);
   const [displayChoice, setDisplayChoice] = useState(
@@ -54,7 +55,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
           const fetchedCactus = { ...(data.data() as Cactus) };
           setCactus(fetchedCactus);
 
-          setTotalPrice(cartItems * fetchedCactus.price);
+          setTotalPrice(quantity * fetchedCactus.price);
         } else {
           console.error('Cactus not found.');
         }
@@ -69,30 +70,29 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
 
   useEffect(() => {
     if (cactus !== undefined) {
-      setTotalPrice((cartItems * Math.floor(cactus.price * 100)) / 100);
+      setTotalPrice((quantity * Math.floor(cactus.price * 100)) / 100);
     }
-    if (cartItems < 1) {
-      setCartItems(1);
+    if (quantity < 1) {
+      setQuantity(1);
     }
-  }, [cartItems]);
+  }, [quantity]);
 
   const decrementHandler = () => {
-    setCartItems((prev) => prev - 1);
+    setQuantity((prev) => prev - 1);
   };
   const incrementHandler = () => {
-    setCartItems((prev) => prev + 1);
+    setQuantity((prev) => prev + 1);
   };
 
   const showShoppingCartSumUp = () => {
     setShowCartModal(true);
   };
+  console.log(cactus);
 
   const addToCartList = () => {
-    setCactusList((prev: any) => {
-      return [...prev, cactusList];
-    });
+    setCactusList((prev) => [...prev, cactus]);
   };
-
+  console.log(cactusList);
   return (
     <>
       {isLoading ? (
@@ -115,7 +115,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
               <div className="flex justify-between mt-1">
                 <span className="font-bold text-base">{cactus.title}</span>
                 <span className="text-base text-[#00c189] font-semibold">
-                  {cactus.price}
+                  {formatCurrency(cactus.price)}
                 </span>
               </div>
               <div className="mx-0 my-3">
@@ -131,7 +131,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
                   >
                     -
                   </button>
-                  <span className="text-[0.9rem] font-bold">{cartItems}</span>
+                  <span className="text-[0.9rem] font-bold">{quantity}</span>
                   <button
                     onClick={incrementHandler}
                     className="bg-[#f3f4f3] text-base flex justify-center items-center w-8 h-8 cursor-pointer transition-[0.5s] duration-[ease] rounded-[50%] border-[none] hover:text-[white] hover:bg-[#00c189]"
@@ -142,7 +142,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
               </div>
               <div className="flex justify-between font-bold px-0 py-2 border-b-[#9e9e9e] border-b-[100%] border-b border-solid">
                 <span>Total:</span>
-                <span>{totalPrice}</span>
+                <span>{formatCurrency(totalPrice)}</span>
               </div>
               <div className="flex justify-end items-center mx-0 my-2">
                 <div className="text-2xl transition-[color] duration-[0.5s] ease-[ease] cursor-pointer mr-2 hover:text-[red]">
@@ -273,7 +273,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
           decrementHandler={decrementHandler}
           incrementHandler={incrementHandler}
           productImage={cactus?.image}
-          cartItems={cartItems}
+          quantity={quantity}
           totalPrice={totalPrice}
           productPrice={cactus?.price}
           setShowCardModal={setShowCartModal}

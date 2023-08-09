@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Cactus } from './CactusList';
 import { useRouter } from 'next/navigation';
+import { formatCurrency } from '@/app/utilities/formatCurrency';
 
 type CactusItemProps = {
   cactus: Cactus;
@@ -32,7 +33,7 @@ export default function CactusItem({ cactus }: CactusItemProps) {
         {description}
       </span>
       <span className="text-[rgb(216,13,13)] font-bold text-[2rem]">
-        {price}
+        {formatCurrency(price)}
       </span>
     </button>
   );

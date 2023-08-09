@@ -6,12 +6,14 @@ import { TiTick } from 'react-icons/ti';
 import { StaticImageData } from 'next/image';
 import Image from 'next/image';
 import { HiOutlineTrash } from 'react-icons/hi';
+import { formatCurrency } from '@/app/utilities/formatCurrency';
+import { motion } from 'framer-motion';
 
 interface Product {
   productImage?: StaticImageData;
   incrementHandler: () => void;
   decrementHandler: () => void;
-  cartItems: number;
+  quantity: number;
   totalPrice: number;
   productPrice?: number;
   setShowCardModal: Dispatch<SetStateAction<boolean>>;
@@ -21,7 +23,7 @@ interface Product {
 export default function CartModal(props: Product) {
   const {
     productImage,
-    cartItems,
+    quantity,
     totalPrice,
     incrementHandler,
     decrementHandler,
@@ -31,7 +33,13 @@ export default function CartModal(props: Product) {
   } = props;
 
   return (
-    <div className="fixed z-10 w-[400px] h-full bg-[#ffffff] px-9 py-0 pt-9 right-0 top-0">
+    <motion.div
+      initial={{ x: 100 }}
+      whileInView={{ x: 0 }}
+      viewport={{ once: false, amount: 0.5 }}
+      transition={{ duration: 0.5 }}
+      className="fixed z-10 w-[400px] h-full bg-[#ffffff] px-9 py-0 pt-9 right-0 top-0"
+    >
       <div className="flex items-center justify-between font-bold">
         <span>Hi! This is your shopping cart</span>
         <RxCross2
@@ -71,7 +79,7 @@ export default function CartModal(props: Product) {
             </div>
             <HiOutlineTrash className="text-xl cursor-pointer" />
           </div>
-          <div className="flex w-full justify-between">
+          <div className="flex w-full items-center justify-between">
             <div className="flex items-center gap-2">
               <button
                 onClick={decrementHandler}
@@ -79,7 +87,7 @@ export default function CartModal(props: Product) {
               >
                 -
               </button>
-              <span className="font-bold">{cartItems}</span>
+              <span className="font-bold">{quantity}</span>
               <button
                 onClick={incrementHandler}
                 className="bg-[#f3f4f3] text-base flex justify-center items-center w-8 h-8 cursor-pointer transition-[0.5s] duration-[ease] rounded-[50%] border-[none] hover:text-[white] hover:bg-[#00c189]"
@@ -88,7 +96,9 @@ export default function CartModal(props: Product) {
               </button>
             </div>
             {productPrice && (
-              <div className="font-bold text-[#00c189]">{productPrice}</div>
+              <div className="font-bold text-[#00c189]">
+                {formatCurrency(productPrice)}
+              </div>
             )}
           </div>
         </div>
@@ -103,7 +113,9 @@ export default function CartModal(props: Product) {
           Total
           <span className="font-bold text-[#7E8784]"> (including VAT)</span>
         </span>
-        <span className="font-bold text-[#00c189]">{totalPrice}</span>
+        <span className="font-bold text-[#00c189]">
+          {formatCurrency(totalPrice)}
+        </span>
       </div>
       <div className="flex flex-col h-20">
         <button className="rounded-full bg-[#00c189] my-2 text-white py-2 px-6 hover:bg-opacity-70 transition-all duration-300">
@@ -118,6 +130,6 @@ export default function CartModal(props: Product) {
           Continue shopping
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 }
