@@ -270,12 +270,9 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
         <CartModal
           decrementHandler={decrementHandler}
           incrementHandler={incrementHandler}
-          productImage={cactus?.image}
           quantity={quantity}
           totalPrice={totalPrice}
-          productPrice={cactus?.price}
           setShowCardModal={setShowCartModal}
-          productType={cactus?.productType}
           cactusesList={cactusesList}
         />
       )}

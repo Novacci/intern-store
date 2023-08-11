@@ -10,27 +10,21 @@ import { formatCurrency } from '@/app/utilities/formatCurrency';
 import { motion } from 'framer-motion';
 
 interface Product {
-  productImage?: StaticImageData;
   incrementHandler: () => void;
   decrementHandler: () => void;
   quantity: number;
   totalPrice: number;
-  productPrice?: number;
   setShowCardModal: Dispatch<SetStateAction<boolean>>;
-  productType?: string;
   cactusesList: any;
 }
 
 export default function CartModal(props: Product) {
   const {
-    productImage,
     quantity,
     totalPrice,
     incrementHandler,
     decrementHandler,
-    productPrice,
     setShowCardModal,
-    productType,
     cactusesList,
   } = props;
 
