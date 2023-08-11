@@ -36,11 +36,11 @@ enum DisplayChoices {
 
 export default function CactusDetailPage(props: CactusDetailPageParams) {
   const [cactus, setCactus] = useState<Cactus | undefined>(undefined);
-  const [cactusList, setCactusList] = useState<any[]>([]); //! ANY type
+  const [cactusesList, setCactusesList] = useState<any[]>([]); //! ANY type
   const [isLoading, setIsLoading] = useState(true);
   const [quantity, setQuantity] = useState(8);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [showCartModal, setShowCartModal] = useState(false);
+  const [showCartModal, setShowCartModal] = useState(true);
   const [displayChoice, setDisplayChoice] = useState(
     DisplayChoices.Specifications
   );
@@ -90,9 +90,9 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
   console.log(cactus);
 
   const addToCartList = () => {
-    setCactusList((prev) => [...prev, cactus]);
+    setCactusesList((prev) => [...prev, cactus]);
   };
-  console.log(cactusList);
+  console.log(cactusesList);
   return (
     <>
       {isLoading ? (
@@ -211,9 +211,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
               Reviews
             </button>
           </div>
-          {/* {cactusList.map((product: any) => (
-            <div>{product.name}</div>
-          ))} */}
+
           <div className="h-auto pt-4">
             {DisplayChoices.Specifications === displayChoice && (
               <div className="flex gap-10">
@@ -278,6 +276,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
           productPrice={cactus?.price}
           setShowCardModal={setShowCartModal}
           productType={cactus?.productType}
+          cactusesList={cactusesList}
         />
       )}
     </>

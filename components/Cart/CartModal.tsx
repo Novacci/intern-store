@@ -18,6 +18,7 @@ interface Product {
   productPrice?: number;
   setShowCardModal: Dispatch<SetStateAction<boolean>>;
   productType?: string;
+  cactusesList: any;
 }
 
 export default function CartModal(props: Product) {
@@ -30,6 +31,7 @@ export default function CartModal(props: Product) {
     productPrice,
     setShowCardModal,
     productType,
+    cactusesList,
   } = props;
 
   return (
@@ -56,52 +58,56 @@ export default function CartModal(props: Product) {
       <div>
         <div className="h-2 max-w-[50vw] bg-[#00c189] rounded-full"></div>
       </div>
-      <div className="flex flex-row mt-4">
-        {productImage && (
-          <Image
-            src={productImage}
-            height={80}
-            width={97}
-            alt="Image of ordered Product"
-            className="h-[120px] mr-2"
-          />
-        )}
-
-        <div className="flex flex-col justify-between w-full">
-          <div className="flex w-full justify-between">
-            <div className="flex flex-col">
-              <span className="font-bold">Adansonii Aurea</span>
-              {productType && (
-                <span>
-                  {productType.charAt(0).toUpperCase() + productType.slice(1)}
-                </span>
-              )}
-            </div>
-            <HiOutlineTrash className="text-xl cursor-pointer" />
-          </div>
-          <div className="flex w-full items-center justify-between">
-            <div className="flex items-center gap-2">
-              <button
-                onClick={decrementHandler}
-                className="bg-[#f3f4f3] text-base w-8 h-8 text-center cursor-pointer transition-[0.5s] duration-[ease] rounded-[50%] border-[none] hover:text-[white] hover:bg-[#00c189]"
-              >
-                -
-              </button>
-              <span className="font-bold">{quantity}</span>
-              <button
-                onClick={incrementHandler}
-                className="bg-[#f3f4f3] text-base flex justify-center items-center w-8 h-8 cursor-pointer transition-[0.5s] duration-[ease] rounded-[50%] border-[none] hover:text-[white] hover:bg-[#00c189]"
-              >
-                +
-              </button>
-            </div>
-            {productPrice && (
-              <div className="font-bold text-[#00c189]">
-                {formatCurrency(productPrice)}
+      <div>
+        {cactusesList.map((product: any) => (
+          <ul key={product.id}>
+            <li className="flex flex-row mt-4">
+              <Image
+                src={product.image}
+                height={80}
+                width={97}
+                alt="Image of ordered Product"
+                className="h-[120px] mr-2"
+              />
+              <div className="flex flex-col justify-between w-full">
+                <div className="flex w-full justify-between">
+                  <div className="flex flex-col">
+                    <span className="font-bold">{product.title}</span>
+                    {product.type && (
+                      <span>
+                        {product.type.charAt(0).toUpperCase() +
+                          product.type.slice(1)}
+                      </span>
+                    )}
+                  </div>
+                  <HiOutlineTrash className="text-xl cursor-pointer" />
+                </div>
+                <div className="flex w-full items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={decrementHandler}
+                      className="bg-[#f3f4f3] text-base w-8 h-8 text-center cursor-pointer transition-[0.5s] duration-[ease] rounded-[50%] border-[none] hover:text-[white] hover:bg-[#00c189]"
+                    >
+                      -
+                    </button>
+                    <span className="font-bold">{quantity}</span>
+                    <button
+                      onClick={incrementHandler}
+                      className="bg-[#f3f4f3] text-base flex justify-center items-center w-8 h-8 cursor-pointer transition-[0.5s] duration-[ease] rounded-[50%] border-[none] hover:text-[white] hover:bg-[#00c189]"
+                    >
+                      +
+                    </button>
+                  </div>
+                  {product.price && (
+                    <div className="font-bold text-[#00c189]">
+                      {formatCurrency(product.price)}
+                    </div>
+                  )}
+                </div>
               </div>
-            )}
-          </div>
-        </div>
+            </li>
+          </ul>
+        ))}
       </div>
       <div className="flex">
         <span className="w-full text-sm pb-1 border-b-[#9e9e9e] border-b-[100%] border-b border-solid">
