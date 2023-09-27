@@ -80,7 +80,7 @@ export default function Form() {
           )}
           <input
             className="focus:outline-none bg-[rgba(34,34,34,0.1)] w-full text-[black] h-60 px-5 py-[15px] rounded-[20px] border-[none]
-            outline: none"
+            outline: none flex"
             type="text"
             {...register('text', {
               required: true,
@@ -99,7 +99,7 @@ export default function Form() {
               Max length for message is 300 characters.
             </p>
           )}
-          <button className='className="no-underline m-12 px-5 py-[22px] border-2 border-solid border-[rgb(0,193,137)] hover:bg-[rgb(0,193,137)] hover:text-[white] transition-colors duration-500 ease-in-out'>
+          <button className='className="no-underline m-12 px-5 py-[22px] border-2 border-solid border-[rgb(0,193,137)] hover:bg-[rgb(0,193,137)] hover:text-[white] transition-colors duration-500 ease-in-out mb-12'>
             SEND EMAIL
           </button>
         </form>
