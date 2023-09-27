@@ -22,7 +22,7 @@ export default function MidBar() {
           InternStore
         </Link>
       </motion.div>
-      <div className="flex items-center gap-4;">
+      <div className="flex items-center gap-6">
         <SelectCurrency />
         <Login />
         <Cart />

@@ -9,9 +9,11 @@ export default function Cart() {
 
   return (
     <div>
-      <Link className="no-underline" href="/cart">
+      <Link className="no-underline flex" href="/cart">
         <Image src={cart} alt="cart" />
-        <span className="text-[#00c189] font-bold">{cartValue}</span>
+        <span className="text-[#00c189] font-bold h-12 flex items-end">
+          {cartValue}
+        </span>
       </Link>
     </div>
   );
