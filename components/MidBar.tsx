@@ -15,8 +15,8 @@ export default function MidBar() {
         transition={{ duration: 0.5 }}
       >
         <Link
-          className="no-underline text-[black] text-[2rem] font-semibold;
-  font-family: itc-avant-garde-gothic-pro, sans-serif;"
+          className="no-underline text-[black] text-[2rem] font-semibold
+  font-sans"
           href="/"
         >
           InternStore

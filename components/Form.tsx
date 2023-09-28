@@ -17,10 +17,7 @@ export default function Form() {
   return (
     <>
       <div className="w-[480px] h-[750px] m-auto pt-12">
-        <h2
-          className="text-center text-[rgb(64,54,54)] font-normal opacity-80 pb-8
-  font-family: itc-avant-garde-gothic-pro, sans-serif"
-        >
+        <h2 className="text-center opacity-80 text-3xl font-mono pb-8 ">
           contact us
         </h2>
         <form
@@ -28,7 +25,7 @@ export default function Form() {
           onSubmit={handleSubmit(onSubmit)}
         >
           <input
-            className="focus:outline-none bg-[rgba(34,34,34,0.1)] w-full text-[black] px-5 py-[15px] rounded-[50px] border-[none]"
+            className="focus:outline-none bg-[rgba(34,34,34,0.1)] w-full text-[black] px-5 py-4 rounded-[50px] border-[none]"
             type="text"
             {...register('name', {
               required: 'Name is required.',
@@ -46,7 +43,7 @@ export default function Form() {
             <p className="text-[red]">Name should be at-least 3 characters.</p>
           )}
           <input
-            className="focus:outline-none bg-[rgba(34,34,34,0.1)] w-full text-[black] px-5 py-[15px] rounded-[50px] border-[none]"
+            className="focus:outline-none bg-[rgba(34,34,34,0.1)] w-full text-[black] px-5 py-4 rounded-[50px] border-[none]"
             type="email"
             {...register('email', {
               required: 'Email is required.',
@@ -61,7 +58,7 @@ export default function Form() {
             <p className="text-[red]">Email is not valid.</p>
           )}
           <input
-            className="focus:outline-none bg-[rgba(34,34,34,0.1)] w-full text-[black] px-5 py-[15px] rounded-[50px] border-[none]"
+            className="focus:outline-none bg-[rgba(34,34,34,0.1)] w-full text-[black] px-5 py-4 rounded-[50px] border-[none]"
             type="text"
             {...register('title', {
               required: 'Title is required.',
@@ -79,8 +76,7 @@ export default function Form() {
             <p className="text-[red]">Title should be at-least 1 characters.</p>
           )}
           <input
-            className="focus:outline-none bg-[rgba(34,34,34,0.1)] w-full text-[black] h-60 px-5 py-[15px] rounded-[20px] border-[none]
-            outline: none flex"
+            className="align-text-top focus:outline-none bg-[rgba(34,34,34,0.1)] w-full text-[black] h-56 px-5 py-4 rounded-[20px] border-[none] outline:none"
             type="text"
             {...register('text', {
               required: true,
