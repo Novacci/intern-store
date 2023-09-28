@@ -75,9 +75,8 @@ export default function Form() {
           {errors.title && errors.title.type === 'minLength' && (
             <p className="text-[red]">Title should be at-least 1 characters.</p>
           )}
-          <input
-            className="align-text-top focus:outline-none bg-[rgba(34,34,34,0.1)] w-full text-[black] h-56 px-5 py-4 rounded-[20px] border-[none] outline:none"
-            type="text"
+          <textarea
+            className="align-top focus:outline-none bg-[rgba(34,34,34,0.1)] w-full text-[black] h-56 px-5 py-4 rounded-[20px] border-[none] outline:none"
             {...register('text', {
               required: true,
               maxLength: {

@@ -32,7 +32,7 @@ export default function CactusItem({ cactus }: CactusItemProps) {
       <span className="text-[rgba(7,7,7,0.4)] font-bold text-[0.9rem]">
         {description}
       </span>
-      <span className="text-[rgb(216,13,13)] font-bold text-[2rem]">
+      <span className="text-[rgb(216,13,13)] font-bold text-[1.5rem]">
         {formatCurrency(price)}
       </span>
     </button>
