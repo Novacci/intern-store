@@ -40,7 +40,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
   const [isLoading, setIsLoading] = useState(true);
   const [quantity, setQuantity] = useState(8);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [showCartModal, setShowCartModal] = useState(true);
+  const [showCartModal, setShowCartModal] = useState(false);
   const [displayChoice, setDisplayChoice] = useState(
     DisplayChoices.Specifications
   );
@@ -87,12 +87,11 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
   const showShoppingCartSumUp = () => {
     setShowCartModal(true);
   };
-  console.log(cactus);
 
   const addToCartList = () => {
     setCactusesList((prev) => [...prev, cactus]);
   };
-  console.log(cactusesList);
+
   return (
     <>
       {isLoading ? (
