@@ -1,6 +1,7 @@
 import './globals.scss';
 import React from 'react';
 import Navbar from '@/components/Navbar';
+import { ReduxProvider } from './redux/provider';
 
 export const metadata = {
   title: 'Next.js',
@@ -15,8 +16,10 @@ export default function RootLayout({
   return (
     <html>
       <body>
-        <Navbar />
-        <div className="children-position">{children}</div>
+        <ReduxProvider>
+          <Navbar />
+          <div className="children-position">{children}</div>
+        </ReduxProvider>
       </body>
     </html>
   );

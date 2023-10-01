@@ -92,6 +92,12 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
     setCactusesList((prev) => [...prev, cactus]);
   };
 
+  const removeCactus = () => {
+    setCactusesList((prev) =>
+      prev.filter((item) => item.cactusId !== cactus?.cactusId)
+    );
+  };
+
   return (
     <>
       {isLoading ? (
@@ -273,6 +279,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
           totalPrice={totalPrice}
           setShowCardModal={setShowCartModal}
           cactusesList={cactusesList}
+          removeCactus={removeCactus}
         />
       )}
     </>

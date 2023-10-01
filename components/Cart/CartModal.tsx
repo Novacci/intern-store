@@ -3,7 +3,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import { TiTick } from 'react-icons/ti';
-import { StaticImageData } from 'next/image';
 import Image from 'next/image';
 import { HiOutlineTrash } from 'react-icons/hi';
 import { formatCurrency } from '@/app/utilities/formatCurrency';
@@ -12,6 +11,7 @@ import { motion } from 'framer-motion';
 interface Product {
   incrementHandler: () => void;
   decrementHandler: () => void;
+  removeCactus: () => void;
   quantity: number;
   totalPrice: number;
   setShowCardModal: Dispatch<SetStateAction<boolean>>;
@@ -24,6 +24,7 @@ export default function CartModal(props: Product) {
     totalPrice,
     incrementHandler,
     decrementHandler,
+    removeCactus,
     setShowCardModal,
     cactusesList,
   } = props;
@@ -74,7 +75,10 @@ export default function CartModal(props: Product) {
                       </span>
                     )}
                   </div>
-                  <HiOutlineTrash className="text-xl cursor-pointer" />
+                  <HiOutlineTrash
+                    onClick={removeCactus}
+                    className="text-xl cursor-pointer"
+                  />
                 </div>
                 <div className="flex w-full items-center justify-between">
                   <div className="flex items-center gap-2">

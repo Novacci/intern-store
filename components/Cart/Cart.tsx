@@ -1,12 +1,13 @@
 import React from 'react';
 import cart from '@/public/images/icons/cart.svg';
 import Image from 'next/image';
-
+import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import CartModal from './CartModal';
 
 export default function Cart() {
-  // const showCart = use;
   const [cartValue, setCartValue] = useState(5);
+  // const showCartModal = useSelector((state) => state.showOrHideCart.);
 
   return (
     <div>
