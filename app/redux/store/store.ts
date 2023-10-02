@@ -1,10 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import showHideCartSlice from '../../utilities/showHideCartSlice';
+import quantitySlice from '../../utilities/quantitySlice';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 
 export const store = configureStore({
+  devTools: true,
   reducer: {
     showHideCartSlice,
+    quantitySlice,
   },
 });
 

@@ -24,9 +24,6 @@ export default function Cart() {
     dispatch(hideCart());
   };
 
-  console.log(dispatch(showCart));
-  console.log(showCartModal);
-
   return (
     <div>
       <div className="no-underline flex items-center">

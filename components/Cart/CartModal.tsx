@@ -9,8 +9,8 @@ import { formatCurrency } from '@/app/utilities/formatCurrency';
 import { motion } from 'framer-motion';
 
 export interface Product {
-  incrementHandler: () => void;
-  decrementHandler: () => void;
+  incrementQuantityHandler: () => void;
+  decrementQuantityHandler: () => void;
   removeCactus: () => void;
   quantity: number;
   totalPrice: number;
@@ -22,8 +22,8 @@ export default function CartModal(props: Product) {
   const {
     quantity,
     totalPrice,
-    incrementHandler,
-    decrementHandler,
+    incrementQuantityHandler,
+    decrementQuantityHandler,
     removeCactus,
     setShowCardModal,
     cactusesList,
@@ -83,14 +83,14 @@ export default function CartModal(props: Product) {
                 <div className="flex w-full items-center justify-between">
                   <div className="flex items-center gap-2">
                     <button
-                      onClick={decrementHandler}
+                      onClick={decrementQuantityHandler}
                       className="bg-[#f3f4f3] text-base w-8 h-8 text-center cursor-pointer transition-[0.5s] duration-[ease] rounded-[50%] border-[none] hover:text-[white] hover:bg-[#00c189]"
                     >
                       -
                     </button>
                     <span className="font-bold">{quantity}</span>
                     <button
-                      onClick={incrementHandler}
+                      onClick={incrementQuantityHandler}
                       className="bg-[#f3f4f3] text-base flex justify-center items-center w-8 h-8 cursor-pointer transition-[0.5s] duration-[ease] rounded-[50%] border-[none] hover:text-[white] hover:bg-[#00c189]"
                     >
                       +

@@ -14,6 +14,12 @@ import height from '@/public/images/main-page-imgs/height.png';
 import cloud from '@/public/images/main-page-imgs/cloud.png';
 import CartModal from '../Cart/CartModal';
 import { formatCurrency } from '@/app/utilities/formatCurrency';
+import { useDispatch } from 'react-redux';
+import { AppDispatch, useAppSelector } from '@/app/redux/store/store';
+import {
+  incrementQuantity,
+  decrementQuantity,
+} from '@/app/utilities/quantitySlice';
 
 interface CactusDetailPageParams {
   cactusId: string;
@@ -26,6 +32,7 @@ export interface Cactus {
   description: string;
   price: number;
   productType: string;
+
 }
 
 enum DisplayChoices {
@@ -38,12 +45,14 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
   const [cactus, setCactus] = useState<Cactus | undefined>(undefined);
   const [cactusesList, setCactusesList] = useState<any[]>([]); //! ANY type
   const [isLoading, setIsLoading] = useState(true);
-  const [quantity, setQuantity] = useState(8);
+  // const [quantity, setQuantity] = useState(2);
   const [totalPrice, setTotalPrice] = useState(0);
   const [showCartModal, setShowCartModal] = useState(false);
   const [displayChoice, setDisplayChoice] = useState(
     DisplayChoices.Specifications
   );
+  const dispatch = useDispatch<AppDispatch>();
+  const quantity = useAppSelector((state) => state.quantitySlice.value);
 
   const docRef = doc(db, 'cactuses', `${props.cactusId}`);
 
@@ -64,7 +73,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
       } finally {
         setIsLoading(false);
       }
-    };
+    }; 
     getCactus();
   }, [props.cactusId]);
 
@@ -72,16 +81,27 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
     if (cactus !== undefined) {
       setTotalPrice((quantity * Math.floor(cactus.price * 100)) / 100);
     }
-    if (quantity < 1) {
-      setQuantity(1);
-    }
   }, [quantity]);
 
-  const decrementHandler = () => {
-    setQuantity((prev) => prev - 1);
+  useEffect(() => {
+    if (cactus !== undefined) {
+      localStorage.setItem('cactus', JSON.stringify(cactus));
+    }
+  }, [cactus]);
+
+  useEffect(() => {
+    const cactus = localStorage.getItem('cactus');
+    console.log(cactus);
+    if (cactus) {
+      setCactusesList((prev) => [...prev, JSON.parse(cactus)]);
+    }
+  }, []);
+
+  const decrementQuantityHandler = () => {
+    dispatch(decrementQuantity());
   };
-  const incrementHandler = () => {
-    setQuantity((prev) => prev + 1);
+  const incrementQuantityHandler = () => {
+    dispatch(incrementQuantity());
   };
 
   const showShoppingCartSumUp = () => {
@@ -131,14 +151,15 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
               <div className="pb-1 border-b-[#9e9e9e] border-b-[100%] border-b border-solid">
                 <div className="flex justify-between items-center w-2/5">
                   <button
-                    onClick={decrementHandler}
+                    disabled={quantity === 1}
+                    onClick={decrementQuantityHandler}
                     className="bg-[#f3f4f3] text-base w-8 h-8 text-center cursor-pointer transition-[0.5s] duration-[ease] rounded-[50%] border-[none] hover:text-[white] hover:bg-[#00c189]"
                   >
                     -
                   </button>
                   <span className="text-[0.9rem] font-bold">{quantity}</span>
                   <button
-                    onClick={incrementHandler}
+                    onClick={incrementQuantityHandler}
                     className="bg-[#f3f4f3] text-base flex justify-center items-center w-8 h-8 cursor-pointer transition-[0.5s] duration-[ease] rounded-[50%] border-[none] hover:text-[white] hover:bg-[#00c189]"
                   >
                     +
@@ -273,8 +294,8 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
       </div>
       {showCartModal && (
         <CartModal
-          decrementHandler={decrementHandler}
-          incrementHandler={incrementHandler}
+          decrementQuantityHandler={decrementQuantityHandler}
+          incrementQuantityHandler={incrementQuantityHandler}
           quantity={quantity}
           totalPrice={totalPrice}
           setShowCardModal={setShowCartModal}

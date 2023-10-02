@@ -13,7 +13,7 @@ export default function Form() {
   const onSubmit = (data: any) => {
     console.log(data);
   };
-  console.log(errors);
+
   return (
     <>
       <div className="w-[480px] h-[750px] m-auto pt-12">
