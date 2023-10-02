@@ -2,7 +2,7 @@ import React from 'react';
 import cart from '@/public/images/icons/cart.svg';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
-import { showCart } from '@/app/utilities/showHideCartSlice';
+import { showCart, hideCart } from '@/app/utilities/showHideCartSlice';
 import { useState } from 'react';
 import CartModal from './CartModal';
 import { AppDispatch } from '@/app/redux/store/store';
@@ -17,8 +17,13 @@ export default function Cart() {
   const dispatch = useDispatch<AppDispatch>();
 
   const showCartToggle = () => {
-    dispatch(showCart);
+    dispatch(showCart());
   };
+
+  const closeCartToggle = () => {
+    dispatch(hideCart());
+  };
+
   console.log(dispatch(showCart));
   console.log(showCartModal);
 
