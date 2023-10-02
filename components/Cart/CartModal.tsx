@@ -8,7 +8,7 @@ import { HiOutlineTrash } from 'react-icons/hi';
 import { formatCurrency } from '@/app/utilities/formatCurrency';
 import { motion } from 'framer-motion';
 
-interface Product {
+export interface Product {
   incrementHandler: () => void;
   decrementHandler: () => void;
   removeCactus: () => void;

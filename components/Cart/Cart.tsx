@@ -1,13 +1,26 @@
 import React from 'react';
 import cart from '@/public/images/icons/cart.svg';
 import Image from 'next/image';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { showCart } from '@/app/utilities/showHideCartSlice';
 import { useState } from 'react';
 import CartModal from './CartModal';
+import { AppDispatch } from '@/app/redux/store/store';
+import { useAppSelector } from '@/app/redux/store/store';
+// import { Product } from './CartModal';
 
 export default function Cart() {
   const [cartValue, setCartValue] = useState(5);
-  // const showCartModal = useSelector((state) => state.showOrHideCart.);
+  const showCartModal = useAppSelector(
+    (state) => state.showHideCartSlice.showOrHideCart
+  );
+  const dispatch = useDispatch<AppDispatch>();
+
+  const showCartToggle = () => {
+    dispatch(showCart);
+  };
+  console.log(dispatch(showCart));
+  console.log(showCartModal);
 
   return (
     <div>

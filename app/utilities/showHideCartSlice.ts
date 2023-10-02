@@ -1,13 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = false;
+export type InitialStateType = {
+  showOrHideCart: boolean;
+};
+
+const initialState: InitialStateType = {
+  showOrHideCart: false,
+};
 
 const showHideCartSlice = createSlice({
   name: 'showOrHideCart',
   initialState,
   reducers: {
-    showCart: (state) => true,
-    hideCart: (state) => false,
+    showCart: (state) => {
+      state.showOrHideCart = true;
+    },
+    hideCart: (state) => {
+      state.showOrHideCart = false;
+    },
   },
 });
 

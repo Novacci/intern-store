@@ -1,10 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import showHideCartSlice from '../../utilities/showHideCartSlice';
+import { TypedUseSelectorHook, useSelector } from 'react-redux';
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
-    showOrHideCart: showHideCartSlice,
+    showHideCartSlice,
   },
 });
 
-export default store;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
