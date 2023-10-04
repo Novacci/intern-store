@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import showHideCartSlice from '../../utilities/showHideCartSlice';
 import quantitySlice from '../../utilities/quantitySlice';
+import cartQuantitySlice from '@/app/utilities/cartQuantitySlice';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 
 export const store = configureStore({
@@ -8,6 +9,7 @@ export const store = configureStore({
   reducer: {
     showHideCartSlice,
     quantitySlice,
+    cartQuantitySlice,
   },
 });
 

@@ -20,6 +20,7 @@ import {
   incrementQuantity,
   decrementQuantity,
 } from '@/app/utilities/quantitySlice';
+import { showCart } from '@/app/utilities/showHideCartSlice';
 
 interface CactusDetailPageParams {
   cactusId: string;
@@ -32,7 +33,7 @@ export interface Cactus {
   description: string;
   price: number;
   productType: string;
-
+  quantity: number;
 }
 
 enum DisplayChoices {
@@ -43,17 +44,17 @@ enum DisplayChoices {
 
 export default function CactusDetailPage(props: CactusDetailPageParams) {
   const [cactus, setCactus] = useState<Cactus | undefined>(undefined);
-  const [cactusesList, setCactusesList] = useState<any[]>([]); //! ANY type
+  const [cactusesList, setCactusesList] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  // const [quantity, setQuantity] = useState(2);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [showCartModal, setShowCartModal] = useState(false);
   const [displayChoice, setDisplayChoice] = useState(
     DisplayChoices.Specifications
   );
   const dispatch = useDispatch<AppDispatch>();
   const quantity = useAppSelector((state) => state.quantitySlice.value);
-
+  const showCartModal = useAppSelector(
+    (state) => state.showHideCartSlice.showOrHideCart
+  );
   const docRef = doc(db, 'cactuses', `${props.cactusId}`);
 
   useEffect(() => {
@@ -63,7 +64,6 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
         if (data.exists()) {
           const fetchedCactus = { ...(data.data() as Cactus) };
           setCactus(fetchedCactus);
-
           setTotalPrice(quantity * fetchedCactus.price);
         } else {
           console.error('Cactus not found.');
@@ -73,7 +73,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
       } finally {
         setIsLoading(false);
       }
-    }; 
+    };
     getCactus();
   }, [props.cactusId]);
 
@@ -105,11 +105,33 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
   };
 
   const showShoppingCartSumUp = () => {
-    setShowCartModal(true);
+    dispatch(showCart());
   };
 
   const addToCartList = () => {
-    setCactusesList((prev) => [...prev, cactus]);
+    // setCactusesList((prev) => {
+    //   const existingCactus = prev.find((item) => item.id === cactus?.cactusId);
+    //   if (existingCactus) {
+    //     existingCactus.quantity += quantity;
+    //     return
+    //   } else {
+    //     const newCactus = { ...cactus, quantity: quantity };
+    //     return [...prev, newCactus];
+    //   }
+    // });
+    console.log(cactusesList);
+    console.log(quantity);
+    setCactusesList((prev) => {
+      const existingCactus = prev.find((item) => item.id === cactus?.cactusId);
+      if (!existingCactus) {
+        return [...prev, { ...cactus, quantity: quantity }];
+      }
+      return prev.map((plant) =>
+        plant.id === cactus?.cactusId
+          ? { ...plant, quantity: +plant.quantity + quantity }
+          : { ...plant, quantity }
+      );
+    });
   };
 
   const removeCactus = () => {
@@ -153,7 +175,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
                   <button
                     disabled={quantity === 1}
                     onClick={decrementQuantityHandler}
-                    className="bg-[#f3f4f3] text-base w-8 h-8 text-center cursor-pointer transition-[0.5s] duration-[ease] rounded-[50%] border-[none] hover:text-[white] hover:bg-[#00c189]"
+                    className="bg-[#f3f4f3] text-base w-8 h-8 text-center cursor-pointer transition-[0.5s] duration-[ease] rounded-[50%] border-[none] hover:text-[white] hover:bg-[#00c189] disabled:opacity-25"
                   >
                     -
                   </button>
@@ -294,11 +316,8 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
       </div>
       {showCartModal && (
         <CartModal
-          decrementQuantityHandler={decrementQuantityHandler}
-          incrementQuantityHandler={incrementQuantityHandler}
-          quantity={quantity}
+          quantity={cactus?.quantity}
           totalPrice={totalPrice}
-          setShowCardModal={setShowCartModal}
           cactusesList={cactusesList}
           removeCactus={removeCactus}
         />

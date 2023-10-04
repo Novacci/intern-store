@@ -7,27 +7,34 @@ import Image from 'next/image';
 import { HiOutlineTrash } from 'react-icons/hi';
 import { formatCurrency } from '@/app/utilities/formatCurrency';
 import { motion } from 'framer-motion';
+import { AppDispatch, useAppSelector } from '@/app/redux/store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  incrementCartQuantity,
+  decrementCartQuantity,
+} from '@/app/utilities/cartQuantitySlice';
+import { hideCart } from '@/app/utilities/showHideCartSlice';
 
 export interface Product {
-  incrementQuantityHandler: () => void;
-  decrementQuantityHandler: () => void;
   removeCactus: () => void;
-  quantity: number;
+  quantity?: number;
   totalPrice: number;
-  setShowCardModal: Dispatch<SetStateAction<boolean>>;
   cactusesList: any;
 }
 
 export default function CartModal(props: Product) {
-  const {
-    quantity,
-    totalPrice,
-    incrementQuantityHandler,
-    decrementQuantityHandler,
-    removeCactus,
-    setShowCardModal,
-    cactusesList,
-  } = props;
+  const { quantity, totalPrice, removeCactus, cactusesList } = props;
+  const dispatch = useDispatch<AppDispatch>();
+  const cartQuantity = useAppSelector((state) => state.cartQuantitySlice.value);
+
+  const decrementCartQuantityHandler = () => {
+    dispatch(decrementCartQuantity());
+  };
+
+  const incrementCartQuantityHandler = () => {
+    dispatch(incrementCartQuantity());
+  };
+  console.log(cactusesList);
 
   return (
     <motion.div
@@ -41,7 +48,7 @@ export default function CartModal(props: Product) {
         <span>Hi! This is your shopping cart</span>
         <RxCross2
           onClick={() => {
-            setShowCardModal(false);
+            dispatch(hideCart());
           }}
           className="cursor-pointer text-2xl"
         />
@@ -83,14 +90,14 @@ export default function CartModal(props: Product) {
                 <div className="flex w-full items-center justify-between">
                   <div className="flex items-center gap-2">
                     <button
-                      onClick={decrementQuantityHandler}
+                      onClick={decrementCartQuantityHandler}
                       className="bg-[#f3f4f3] text-base w-8 h-8 text-center cursor-pointer transition-[0.5s] duration-[ease] rounded-[50%] border-[none] hover:text-[white] hover:bg-[#00c189]"
                     >
                       -
                     </button>
-                    <span className="font-bold">{quantity}</span>
+                    <span className="font-bold">{product.quantity}</span>
                     <button
-                      onClick={incrementQuantityHandler}
+                      onClick={incrementCartQuantityHandler}
                       className="bg-[#f3f4f3] text-base flex justify-center items-center w-8 h-8 cursor-pointer transition-[0.5s] duration-[ease] rounded-[50%] border-[none] hover:text-[white] hover:bg-[#00c189]"
                     >
                       +
@@ -127,7 +134,7 @@ export default function CartModal(props: Product) {
         </button>
         <button
           onClick={() => {
-            setShowCardModal(false);
+            dispatch(hideCart());
           }}
           className="rounded-full border-solid border-black mb-6 border py-2 px-6 hover:text-white hover:bg-black transition-all duration-300"
         >
