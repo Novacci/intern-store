@@ -109,18 +109,6 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
   };
 
   const addToCartList = () => {
-    // setCactusesList((prev) => {
-    //   const existingCactus = prev.find((item) => item.id === cactus?.cactusId);
-    //   if (existingCactus) {
-    //     existingCactus.quantity += quantity;
-    //     return
-    //   } else {
-    //     const newCactus = { ...cactus, quantity: quantity };
-    //     return [...prev, newCactus];
-    //   }
-    // });
-    console.log(cactusesList);
-    console.log(quantity);
     setCactusesList((prev) => {
       const existingCactus = prev.find((item) => item.id === cactus?.cactusId);
       if (!existingCactus) {
