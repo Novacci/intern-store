@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body>
+      <body className="w-full">
         <ReduxProvider>
           <Navbar />
           <div className="children-position">{children}</div>
