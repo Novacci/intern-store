@@ -23,6 +23,7 @@ export default function YoutubeSection() {
         src="https://www.youtube.com/embed/i810CxN5Q6Q"
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        className="px-8"
       ></iframe>
 
       <motion.div
