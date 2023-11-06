@@ -7,7 +7,7 @@ export default function Intro() {
       className="flex flex-col items-center gap-8 mt-8 pt-10 pb-[120px] px-[15px]
     font-family: itc-avant-garde-gothic-pro, sans-serif"
     >
-      <h2 className="text-[rgb(64,54,54)] opacity-80 m-0">
+      <h2 className="font-bold text-[rgb(64,54,54)] opacity-80 m-0 text-xl font-serif">
         Hey, we're InternStore
       </h2>
       <p className="text-[1.2rem]">

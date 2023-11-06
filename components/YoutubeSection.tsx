@@ -16,14 +16,15 @@ export default function YoutubeSection() {
           our youtube channel
         </h2>
       </motion.div>
+
       <iframe
         width="100%"
         height="500px"
         src="https://www.youtube.com/embed/i810CxN5Q6Q"
         title="YouTube video player"
-        className="border-[none]"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       ></iframe>
+
       <motion.div
         initial={{ y: 300 }}
         whileInView={{ y: 0 }}

@@ -13,13 +13,13 @@ const images = [worker, admirer, girl];
 export default function MainImage() {
   const [currentImage, setCurrentImage] = useState<StaticImageData>(images[0]);
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentImage(images[Math.floor(Math.random() * images.length)]);
-    }, 2000);
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     setCurrentImage(images[Math.floor(Math.random() * images.length)]);
+  //   }, 2000);
 
-    return () => clearInterval(intervalId);
-  }, []);
+  //   return () => clearInterval(intervalId);
+  // }, []);
 
   return (
     <motion.div
@@ -27,7 +27,7 @@ export default function MainImage() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <Image width={884} height={340} src={currentImage} alt="garden" />
+      <Image width={900} height={340} src={currentImage} alt="garden" />
     </motion.div>
   );
 }
