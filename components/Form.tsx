@@ -16,7 +16,7 @@ export default function Form() {
 
   return (
     <>
-      <div className="w-[480px] h-[750px] m-auto pt-12">
+      <div className="max-w-[480px] m-auto pt-12">
         <h2 className="text-center opacity-80 text-3xl font-mono pb-8 ">
           contact us
         </h2>
