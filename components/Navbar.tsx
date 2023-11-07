@@ -5,7 +5,7 @@ import BotBar from './BotBar';
 
 export default function Navbar() {
   return (
-    <nav className="fixed bg-[white] z-[2] flex flex-col">
+    <nav className="fixed w-full bg-[white] z-[2] flex flex-col">
       <TopBar />
       <MidBar />
       <BotBar />
