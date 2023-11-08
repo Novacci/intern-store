@@ -32,14 +32,14 @@ export default function HowItWorks() {
           </div>
         </div>
         <div className="flex flex-col justify-between gap-4">
-          <div className="flex gap-12 items-center">
+          <div className="flex gap-12 items-center md:gap-24">
             <Image height={60} src={stageOne} alt="stageOne" />
             <div className="flex flex-col">
               <h3 className="text-[rgb(0,193,137)] m-0 font-bold">You order</h3>
               <span>You build a unique product list suited to Your needs.</span>
             </div>
           </div>
-          <div className="flex gap-12 items-center">
+          <div className="flex gap-12 items-center md:gap-24">
             <Image height={60} src={stageTwo} alt="stageTwo" />
             <div className="flex flex-col ">
               <h3 className="text-[rgb(0,193,137)] m-0 font-bold">
@@ -53,7 +53,7 @@ export default function HowItWorks() {
           </div>
           <div className="flex gap-12 items-center">
             <Image height={60} src={stageThree} alt="stageThree" />
-            <div className="flex flex-col ">
+            <div className="flex flex-col">
               <h3 className="text-[rgb(0,193,137)] m-0 font-bold">
                 You receive
               </h3>
