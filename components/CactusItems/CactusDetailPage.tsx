@@ -61,8 +61,12 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
     const getCactus = async () => {
       try {
         const data = await getDoc(docRef);
+        console.log(data.id);
         if (data.exists()) {
-          const fetchedCactus = { ...(data.data() as Cactus) };
+          const fetchedCactus = {
+            ...(data.data() as Cactus),
+            cactusId: data.id,
+          };
           setCactus(fetchedCactus);
           setTotalPrice(quantity * fetchedCactus.price);
         } else {
@@ -110,12 +114,14 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
 
   const addToCartList = () => {
     setCactusesList((prev) => {
-      const existingCactus = prev.find((item) => item.id === cactus?.cactusId);
+      const existingCactus = prev.find(
+        (item) => item.cactusId === cactus?.cactusId
+      );
       if (!existingCactus) {
         return [...prev, { ...cactus, quantity: quantity }];
       }
       return prev.map((plant) =>
-        plant.id === cactus?.cactusId
+        plant.cactusId === cactus?.cactusId
           ? { ...plant, quantity: +plant.quantity + quantity }
           : { ...plant, quantity }
       );
@@ -127,7 +133,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
       prev.filter((item) => item.cactusId !== cactus?.cactusId)
     );
   };
-
+  console.log('sprawdzam quantity w obieckie', cactus);
   return (
     <>
       {isLoading ? (
@@ -304,10 +310,10 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
       </div>
       {showCartModal && (
         <CartModal
-          quantity={cactus?.quantity}
           totalPrice={totalPrice}
           cactusesList={cactusesList}
           removeCactus={removeCactus}
+          // cactusId={props.cactusId}
         />
       )}
     </>

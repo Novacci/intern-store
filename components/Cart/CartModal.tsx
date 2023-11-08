@@ -1,6 +1,7 @@
 'use client';
 
 import { Dispatch, SetStateAction } from 'react';
+import { useEffect } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import { TiTick } from 'react-icons/ti';
 import Image from 'next/image';
@@ -14,28 +15,33 @@ import {
   decrementCartQuantity,
 } from '@/app/utilities/cartQuantitySlice';
 import { hideCart } from '@/app/utilities/showHideCartSlice';
+import { Cactus } from '@/components/CactusItems/CactusDetailPage';
 
 export interface Product {
   removeCactus: () => void;
-  quantity?: number;
+  // cactusId: string;
   totalPrice: number;
-  cactusesList: any;
+  cactusesList: Cactus[];
 }
 
 export default function CartModal(props: Product) {
-  const { quantity, totalPrice, removeCactus, cactusesList } = props;
+  const { totalPrice, removeCactus, cactusesList } = props;
   const dispatch = useDispatch<AppDispatch>();
-  const cartQuantity = useAppSelector((state) => state.cartQuantitySlice.value);
 
-  const decrementCartQuantityHandler = () => {
-    dispatch(decrementCartQuantity());
+  const decrementCartQuantityHandler = (id: string) => {
+    const chosenCactus = cactusesList.find(
+      (item: Cactus) => item.cactusId === id
+    );
+
+    if (chosenCactus) {
+      chosenCactus.quantity--;
+      dispatch(decrementCartQuantity());
+    }
   };
 
   const incrementCartQuantityHandler = () => {
     dispatch(incrementCartQuantity());
   };
-  console.log(cactusesList);
-
   return (
     <motion.div
       initial={{ x: 100 }}
@@ -62,7 +68,7 @@ export default function CartModal(props: Product) {
       </div>
       <div>
         {cactusesList.map((product: any) => (
-          <ul key={product.id}>
+          <ul key={product.cactusId}>
             <li className="flex flex-row mt-4">
               <Image
                 src={product.image}
@@ -90,12 +96,16 @@ export default function CartModal(props: Product) {
                 <div className="flex w-full items-center justify-between">
                   <div className="flex items-center gap-2">
                     <button
-                      onClick={decrementCartQuantityHandler}
+                      onClick={() =>
+                        decrementCartQuantityHandler(product.cactusId)
+                      }
                       className="bg-[#f3f4f3] text-base w-8 h-8 text-center cursor-pointer transition-[0.5s] duration-[ease] rounded-[50%] border-[none] hover:text-[white] hover:bg-[#00c189]"
                     >
                       -
                     </button>
-                    <span className="font-bold">{product.quantity}</span>
+                    <span className="font-bold">
+                      {product && product.quantity}
+                    </span>
                     <button
                       onClick={incrementCartQuantityHandler}
                       className="bg-[#f3f4f3] text-base flex justify-center items-center w-8 h-8 cursor-pointer transition-[0.5s] duration-[ease] rounded-[50%] border-[none] hover:text-[white] hover:bg-[#00c189]"
