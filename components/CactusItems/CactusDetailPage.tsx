@@ -133,7 +133,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
       prev.filter((item) => item.cactusId !== cactus?.cactusId)
     );
   };
-  console.log('sprawdzam quantity w obieckie', cactus);
+
   return (
     <>
       {isLoading ? (
@@ -313,7 +313,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
           totalPrice={totalPrice}
           cactusesList={cactusesList}
           removeCactus={removeCactus}
-          // cactusId={props.cactusId}
+          cactusId={props.cactusId}
         />
       )}
     </>

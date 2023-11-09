@@ -19,7 +19,7 @@ import { Cactus } from '@/components/CactusItems/CactusDetailPage';
 
 export interface Product {
   removeCactus: () => void;
-  // cactusId: string;
+  cactusId: string;
   totalPrice: number;
   cactusesList: Cactus[];
 }
@@ -39,7 +39,15 @@ export default function CartModal(props: Product) {
     }
   };
 
-  const incrementCartQuantityHandler = () => {
+  const incrementCartQuantityHandler = (id: string) => {
+    const chosenCactus = cactusesList.find(
+      (item: Cactus) => item.cactusId === id
+    );
+
+    if (chosenCactus) {
+      chosenCactus.quantity++;
+      dispatch(decrementCartQuantity());
+    }
     dispatch(incrementCartQuantity());
   };
   return (
@@ -103,11 +111,11 @@ export default function CartModal(props: Product) {
                     >
                       -
                     </button>
-                    <span className="font-bold">
-                      {product && product.quantity}
-                    </span>
+                    <span className="font-bold">{product.quantity}</span>
                     <button
-                      onClick={incrementCartQuantityHandler}
+                      onClick={() =>
+                        incrementCartQuantityHandler(product.cactusId)
+                      }
                       className="bg-[#f3f4f3] text-base flex justify-center items-center w-8 h-8 cursor-pointer transition-[0.5s] duration-[ease] rounded-[50%] border-[none] hover:text-[white] hover:bg-[#00c189]"
                     >
                       +
