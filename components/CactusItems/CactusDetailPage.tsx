@@ -34,6 +34,7 @@ export interface Cactus {
   price: number;
   productType: string;
   quantity: number;
+  type: string;
 }
 
 enum DisplayChoices {
@@ -314,6 +315,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
           cactusesList={cactusesList}
           removeCactus={removeCactus}
           cactusId={props.cactusId}
+          setCactusesList={setCactusesList}
         />
       )}
     </>

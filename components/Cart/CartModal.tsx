@@ -1,7 +1,7 @@
 'use client';
 
 import { Dispatch, SetStateAction } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import { TiTick } from 'react-icons/ti';
 import Image from 'next/image';
@@ -22,33 +22,32 @@ export interface Product {
   cactusId: string;
   totalPrice: number;
   cactusesList: Cactus[];
+  setCactusesList: Dispatch<SetStateAction<any[]>>;
 }
 
 export default function CartModal(props: Product) {
-  const { totalPrice, removeCactus, cactusesList } = props;
+  const { totalPrice, removeCactus, cactusesList, setCactusesList } = props;
   const dispatch = useDispatch<AppDispatch>();
 
   const decrementCartQuantityHandler = (id: string) => {
-    const chosenCactus = cactusesList.find(
-      (item: Cactus) => item.cactusId === id
-    );
-
-    if (chosenCactus) {
-      chosenCactus.quantity--;
-      dispatch(decrementCartQuantity());
-    }
+    setCactusesList((prev) => {
+      return prev.map((cactus) => {
+        if (cactus.cactusId === id) {
+          return { ...cactus, quantity: cactus.quantity - 1 };
+        } else return cactus;
+      });
+    });
   };
 
   const incrementCartQuantityHandler = (id: string) => {
-    const chosenCactus = cactusesList.find(
-      (item: Cactus) => item.cactusId === id
-    );
-
-    if (chosenCactus) {
-      chosenCactus.quantity++;
-      dispatch(decrementCartQuantity());
-    }
-    dispatch(incrementCartQuantity());
+    setCactusesList((prev) => {
+      return prev.map((cactus) => {
+        if (cactus.cactusId === id) {
+          return { ...cactus, quantity: cactus.quantity + 1 };
+        } else return cactus;
+      });
+    });
+    console.log(cactusesList);
   };
   return (
     <motion.div
@@ -75,7 +74,7 @@ export default function CartModal(props: Product) {
         <div className="h-2 max-w-[50vw] bg-[#00c189] rounded-full"></div>
       </div>
       <div>
-        {cactusesList.map((product: any) => (
+        {cactusesList.map((product: Cactus) => (
           <ul key={product.cactusId}>
             <li className="flex flex-row mt-4">
               <Image
