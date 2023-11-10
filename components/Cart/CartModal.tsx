@@ -47,7 +47,6 @@ export default function CartModal(props: Product) {
         } else return cactus;
       });
     });
-    console.log(cactusesList);
   };
   return (
     <motion.div
@@ -104,7 +103,9 @@ export default function CartModal(props: Product) {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() =>
-                        decrementCartQuantityHandler(product.cactusId)
+                        product.quantity === 1
+                          ? removeCactus()
+                          : decrementCartQuantityHandler(product.cactusId)
                       }
                       className="bg-[#f3f4f3] text-base w-8 h-8 text-center cursor-pointer transition-[0.5s] duration-[ease] rounded-[50%] border-[none] hover:text-[white] hover:bg-[#00c189]"
                     >
