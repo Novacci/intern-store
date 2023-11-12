@@ -1,17 +1,18 @@
 'use client';
 
 import { Dispatch, SetStateAction } from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import { TiTick } from 'react-icons/ti';
 import Image from 'next/image';
 import { HiOutlineTrash } from 'react-icons/hi';
 import { formatCurrency } from '@/app/utilities/formatCurrency';
 import { motion } from 'framer-motion';
-import { AppDispatch, useAppSelector } from '@/app/redux/store/store';
-import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch } from '@/app/redux/store/store';
+import { useDispatch } from 'react-redux';
 import { hideCart } from '@/app/utilities/showHideCartSlice';
 import { Cactus } from '@/components/CactusItems/CactusDetailPage';
+import { ChangeEvent, KeyboardEvent } from 'react';
 
 export interface Product {
   removeCactus: () => void;
@@ -19,11 +20,19 @@ export interface Product {
   totalPrice: number;
   cactusesList: Cactus[];
   setCactusesList: Dispatch<SetStateAction<any[]>>;
+  setTotalPrice: Dispatch<SetStateAction<number>>;
 }
 
 export default function CartModal(props: Product) {
-  const { totalPrice, removeCactus, cactusesList, setCactusesList } = props;
+  const {
+    totalPrice,
+    removeCactus,
+    cactusesList,
+    setCactusesList,
+    setTotalPrice,
+  } = props;
   const dispatch = useDispatch<AppDispatch>();
+  const [discountCode, setDiscoutCode] = useState<string>('');
 
   const decrementCartQuantityHandler = (id: string) => {
     setCactusesList((prev) => {
@@ -43,6 +52,18 @@ export default function CartModal(props: Product) {
         } else return cactus;
       });
     });
+  };
+
+  const discoutInputHandler = (
+    event: ChangeEvent<HTMLInputElement> & KeyboardEvent<HTMLInputElement>
+  ) => {
+    setDiscoutCode(event.target.value);
+    if (event.key === 'Enter') {
+      setDiscoutCode('');
+    }
+    if (discountCode === 'RABAT25') {
+      setTotalPrice(totalPrice * 0.75);
+    }
   };
   return (
     <motion.div
@@ -136,6 +157,7 @@ export default function CartModal(props: Product) {
       <div className="w-full py-3">
         <div className="relative h-10 w-full min-w-[200px]">
           <input
+            onChange={discoutInputHandler}
             className="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
             placeholder=" "
           />
@@ -144,6 +166,11 @@ export default function CartModal(props: Product) {
           </label>
         </div>
       </div>
+      {discountCode === 'RABAT25' ? (
+        <span className="text-green-500">Discount applied! 25% off.</span>
+      ) : (
+        <span className="text-red-600">Invalid code. Try again.</span>
+      )}
       <div className="flex py-3 justify-between font-bold text-sm  border-b-[#9e9e9e] border-b-[100%] border-b border-solid">
         <span>
           Total

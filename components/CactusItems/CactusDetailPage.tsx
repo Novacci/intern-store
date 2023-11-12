@@ -315,6 +315,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
           removeCactus={removeCactus}
           cactusId={props.cactusId}
           setCactusesList={setCactusesList}
+          setTotalPrice={setTotalPrice}
         />
       )}
     </>
