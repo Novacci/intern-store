@@ -62,7 +62,6 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
     const getCactus = async () => {
       try {
         const data = await getDoc(docRef);
-        console.log(data.id);
         if (data.exists()) {
           const fetchedCactus = {
             ...(data.data() as Cactus),
@@ -96,7 +95,6 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
 
   useEffect(() => {
     const cactus = localStorage.getItem('cactus');
-    console.log(cactus);
     if (cactus) {
       setCactusesList((prev) => [...prev, JSON.parse(cactus)]);
     }
