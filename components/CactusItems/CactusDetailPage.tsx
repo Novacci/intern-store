@@ -165,6 +165,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
                   in nursery pot
                 </span>
               </div>
+
               <div className="pb-1 border-b-[#9e9e9e] border-b-[100%] border-b border-solid">
                 <div className="flex justify-between items-center w-2/5">
                   <button

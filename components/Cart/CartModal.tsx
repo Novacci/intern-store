@@ -10,10 +10,6 @@ import { formatCurrency } from '@/app/utilities/formatCurrency';
 import { motion } from 'framer-motion';
 import { AppDispatch, useAppSelector } from '@/app/redux/store/store';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  incrementCartQuantity,
-  decrementCartQuantity,
-} from '@/app/utilities/cartQuantitySlice';
 import { hideCart } from '@/app/utilities/showHideCartSlice';
 import { Cactus } from '@/components/CactusItems/CactusDetailPage';
 
