@@ -44,7 +44,7 @@ enum DisplayChoices {
 }
 
 export default function CactusDetailPage(props: CactusDetailPageParams) {
-  const [cactus, setCactus] = useState<Cactus | undefined>(undefined);
+  const [cactus, setCactus] = useState<Cactus | undefined>();
   const [cactusesList, setCactusesList] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -89,27 +89,16 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
 
   useEffect(() => {
     if (cactus !== undefined) {
-      localStorage.setItem('cactus', JSON.stringify(cactus));
+      localStorage.setItem('cactusKey', JSON.stringify(cactusesList));
     }
-  }, [cactus]);
+  }, [cactusesList]);
 
   useEffect(() => {
-    const cactus = localStorage.getItem('cactus');
+    const cactus = localStorage.getItem('cactusKey');
     if (cactus) {
-      setCactusesList((prev) => [...prev, JSON.parse(cactus)]);
+      setCactusesList((prev) => [...prev, ...JSON.parse(cactus)]);
     }
   }, []);
-
-  const decrementQuantityHandler = () => {
-    dispatch(decrementQuantity());
-  };
-  const incrementQuantityHandler = () => {
-    dispatch(incrementQuantity());
-  };
-
-  const showShoppingCartSumUp = () => {
-    dispatch(showCart());
-  };
 
   const addToCartList = () => {
     setCactusesList((prev) => {
@@ -127,10 +116,25 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
     });
   };
 
+  const decrementQuantityHandler = () => {
+    dispatch(decrementQuantity());
+  };
+  const incrementQuantityHandler = () => {
+    dispatch(incrementQuantity());
+  };
+
+  const showShoppingCartSumUp = () => {
+    dispatch(showCart());
+  };
+
   const removeCactus = () => {
-    setCactusesList((prev) =>
-      prev.filter((item) => item.cactusId !== cactus?.cactusId)
-    );
+    setCactusesList((prev) => {
+      const newCactusesList = prev.filter(
+        (item) => item.cactusId !== cactus?.cactusId
+      );
+      localStorage.setItem('cactusKey', JSON.stringify(newCactusesList));
+      return newCactusesList;
+    });
   };
 
   return (

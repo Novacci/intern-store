@@ -33,6 +33,7 @@ export default function CartModal(props: Product) {
   } = props;
   const dispatch = useDispatch<AppDispatch>();
   const [discountCode, setDiscoutCode] = useState<string>('');
+  const [isDiscounted, setIsDiscounted] = useState<boolean>(false);
 
   const decrementCartQuantityHandler = (id: string) => {
     setCactusesList((prev) => {
@@ -54,17 +55,17 @@ export default function CartModal(props: Product) {
     });
   };
 
-  const discoutInputHandler = (
-    event: ChangeEvent<HTMLInputElement> & KeyboardEvent<HTMLInputElement>
-  ) => {
+  const discoutInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setDiscoutCode(event.target.value);
-    if (event.key === 'Enter') {
-      setDiscoutCode('');
-    }
+  };
+
+  const discoutCodeValidator = () => {
     if (discountCode === 'RABAT25') {
       setTotalPrice(totalPrice * 0.75);
+      setIsDiscounted(true);
     }
   };
+
   return (
     <motion.div
       initial={{ x: 100 }}
@@ -166,11 +167,20 @@ export default function CartModal(props: Product) {
           </label>
         </div>
       </div>
-      {discountCode === 'RABAT25' ? (
-        <span className="text-green-500">Discount applied! 25% off.</span>
-      ) : (
-        <span className="text-red-600">Invalid code. Try again.</span>
-      )}
+      <div className="flex flex-col">
+        <button
+          onClick={discoutCodeValidator}
+          className="middle none center rounded-lg bg-green-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          data-ripple-light="true"
+        >
+          APPLY DISCOUT CODE
+        </button>
+        {isDiscounted ? (
+          <span className="text-green-500">Discount applied! 25% off.</span>
+        ) : (
+          <span className="text-red-600">Invalid code. Try again.</span>
+        )}
+      </div>
       <div className="flex py-3 justify-between font-bold text-sm  border-b-[#9e9e9e] border-b-[100%] border-b border-solid">
         <span>
           Total
