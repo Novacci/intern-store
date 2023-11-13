@@ -13,13 +13,13 @@ const images = [worker, admirer, girl];
 export default function MainImage() {
   const [currentImage, setCurrentImage] = useState<StaticImageData>(images[0]);
 
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     setCurrentImage(images[Math.floor(Math.random() * images.length)]);
-  //   }, 2000);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentImage(images[Math.floor(Math.random() * images.length)]);
+    }, 2000);
 
-  //   return () => clearInterval(intervalId);
-  // }, []);
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <motion.div
