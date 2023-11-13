@@ -34,6 +34,7 @@ export default function CartModal(props: Product) {
   const dispatch = useDispatch<AppDispatch>();
   const [discountCode, setDiscoutCode] = useState<string>('');
   const [isDiscounted, setIsDiscounted] = useState<boolean>(false);
+  const [isNotDiscounted, setIsNotDiscounted] = useState<boolean>(false);
 
   const decrementCartQuantityHandler = (id: string) => {
     setCactusesList((prev) => {
@@ -63,6 +64,10 @@ export default function CartModal(props: Product) {
     if (discountCode === 'RABAT25') {
       setTotalPrice(totalPrice * 0.75);
       setIsDiscounted(true);
+      setIsNotDiscounted(false);
+    } else {
+      setIsNotDiscounted(true);
+      setIsDiscounted(false);
     }
   };
 
@@ -175,9 +180,11 @@ export default function CartModal(props: Product) {
         >
           APPLY DISCOUT CODE
         </button>
-        {isDiscounted ? (
+
+        {isDiscounted && (
           <span className="text-green-500">Discount applied! 25% off.</span>
-        ) : (
+        )}
+        {isNotDiscounted && (
           <span className="text-red-600">Invalid code. Try again.</span>
         )}
       </div>
