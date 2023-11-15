@@ -2,7 +2,7 @@
 
 import { StaticImageData } from 'next/image';
 import CactusItem from './CactusItem';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import { db } from '../../app/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 
@@ -16,6 +16,7 @@ export interface Cactus {
 
 export default function CactusList() {
   const [cactuses, setCactuses] = useState<Cactus[]>([]);
+  const [query, setQuery] = useState<string>('');
   const cactusCollection = collection(db, 'cactuses');
 
   useEffect(() => {
@@ -27,6 +28,14 @@ export default function CactusList() {
     getCactus();
   }, []);
 
+  const queryInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setQuery(event.target.value);
+  };
+
+  const filteredCactuses = cactuses.filter(
+    (cactus) => cactus.title.toLowerCase().indexOf(query.toLowerCase()) !== -1
+  );
+
   return (
     <>
       <div className="text-lg relative flex justify-end top-6 bg-transparent text-gray-800">
@@ -35,6 +44,7 @@ export default function CactusList() {
             className="bg-transparent border-none mr-3 px-2 leading-tight focus:outline-none"
             type="text"
             placeholder="Search"
+            onChange={queryInputHandler}
           />
           <button type="submit" className="absolute right-0 top-0 mt-3 mr-4">
             <svg
@@ -51,7 +61,7 @@ export default function CactusList() {
       </div>
 
       <div className="flex gap-12 flex-wrap relative justify-center top-12">
-        {cactuses.map((cactus: Cactus) => (
+        {filteredCactuses.map((cactus: Cactus) => (
           <CactusItem key={cactus.id} cactus={cactus} />
         ))}
       </div>
