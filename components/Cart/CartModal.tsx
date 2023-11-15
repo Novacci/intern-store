@@ -12,7 +12,7 @@ import { AppDispatch } from '@/app/redux/store/store';
 import { useDispatch } from 'react-redux';
 import { hideCart } from '@/app/utilities/showHideCartSlice';
 import { Cactus } from '@/components/CactusItems/CactusDetailPage';
-import { ChangeEvent, KeyboardEvent } from 'react';
+import { ChangeEvent } from 'react';
 
 export interface Product {
   removeCactus: () => void;
