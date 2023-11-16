@@ -9,51 +9,102 @@ import { collection, getDocs } from 'firebase/firestore';
 export interface Cactus {
   id: string;
   title: string;
-  image: StaticImageData;
+  image?: StaticImageData;
   description: string;
   price: number;
 }
 
+const MOCKED_CACTUSES = [
+  {
+    id: '1',
+    title: 'wojtas',
+    // image:
+    //   'https://firebasestorage.googleapis.com/v0/b/internstore-1a37a.appspot.com/o/cactuses%2FBall%20Cactus.png?alt=media&token=f170821d-a363-41f1-aa0f-12e3e693df7d',
+    description: 'bardzo fajny kaktusik',
+    price: 19.99,
+  },
+  {
+    id: '2',
+    title: 'berewicz',
+    // image:
+    //   'https://firebasestorage.googleapis.com/v0/b/internstore-1a37a.appspot.com/o/cactuses%2FBall%20Cactus.png?alt=media&token=f170821d-a363-41f1-aa0f-12e3e693df7d',
+    description: 'fajny katkus',
+    price: 14.99,
+  },
+  {
+    id: '3',
+    title: 'mateo',
+    // image:
+    //   'https://firebasestorage.googleapis.com/v0/b/internstore-1a37a.appspot.com/o/cactuses%2FBall%20Cactus.png?alt=media&token=f170821d-a363-41f1-aa0f-12e3e693df7d',
+    description: 'fajny katkus',
+    price: 29.99,
+  },
+];
+
 export default function CactusList() {
-  const [cactuses, setCactuses] = useState<Cactus[]>([]);
+  const [cactuses, setCactuses] = useState<Cactus[]>(MOCKED_CACTUSES);
   const [query, setQuery] = useState<string>('');
   const [sortOrder, setSortOrder] = useState('asc');
-  const [sortedCactuses, setSortedCactuses] = useState<any>([]);
+  // const [cac, setCac] = useState(MOCKED_CACTUSES);
+
   const cactusCollection = collection(db, 'cactuses');
 
-  useEffect(() => {
-    const getCactus = async () => {
-      const data = await getDocs(cactusCollection);
+  // useEffect(() => {
+  //   const getCactus = async () => {
+  //     const data = await getDocs(cactusCollection);
 
-      setCactuses(data.docs.map((doc: any) => ({ ...doc.data(), id: doc.id })));
-    };
-    getCactus();
-  }, []);
+  //     setCactuses(data.docs.map((doc: any) => ({ ...doc.data(), id: doc.id })));
+  //   };
+  //   getCactus();
+  // }, []);
 
+  // const queryInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setQuery(event.target.value);
+
+  //   const filteredCactuses = cactuses.filter((cactus) =>
+  //     cactus.title.toLowerCase().includes(event.target.value)
+  //   );
+  //   console.log(filteredCactuses);
+  //   console.log(event.target.value);
+  //   setCac(filteredCactuses);
+  // };
+
+  // const handleSortClick = () => {
+  //   const newSortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+  //   setSortOrder(newSortOrder);
+  //   const newSortedCactuses = cactuses.sort((a, b) =>
+  //     newSortOrder === 'asc' ? a.price - b.price : b.price - a.price
+  //   );
+  //   setCac(newSortedCactuses);
+  // };
   const queryInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
   };
 
-  const filteredCactuses = cactuses.filter(
-    (cactus) => cactus.title.toLowerCase().indexOf(query.toLowerCase()) !== -1
-  );
-
   const handleSortClick = () => {
     const newSortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
     setSortOrder(newSortOrder);
+  };
 
-    const newSortedCactuses = filteredCactuses
-      .slice()
-      .sort((a, b) =>
-        newSortOrder === 'asc' ? a.price - b.price : b.price - a.price
-      );
-    setSortedCactuses(newSortedCactuses);
+  const sortingCactuses = (cactusA: Cactus, cactusB: Cactus) => {
+    return sortOrder === 'asc'
+      ? cactusA.price - cactusB.price
+      : cactusB.price - cactusA.price;
+  };
+
+  const filteringCactuses = (cactus: Cactus) => {
+    return cactus.title.toLowerCase().includes(query);
   };
 
   return (
     <>
-      <div className="text-lg relative flex justify-end top-6 bg-transparent text-gray-800">
-        <button onClick={handleSortClick}>sorting</button>
+      <div className="text-lg relative flex justify-between top-6 bg-transparent text-gray-800">
+        <button
+          className="middle none center rounded-lg bg-green-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          onClick={handleSortClick}
+        >
+          Sort By Price
+        </button>
         <div className="flex max-w-[10rem] items-center border-b  border-teal-500 py-2">
           <input
             className="bg-transparent border-none mr-3 px-2 leading-tight focus:outline-none"
@@ -76,9 +127,12 @@ export default function CactusList() {
       </div>
 
       <div className="flex gap-12 flex-wrap relative justify-center top-12">
-        {sortedCactuses.map((cactus: Cactus) => (
-          <CactusItem key={cactus.id} cactus={cactus} />
-        ))}
+        {cactuses
+          .filter(filteringCactuses)
+          .sort(sortingCactuses)
+          .map((cactus: Cactus) => (
+            <CactusItem key={cactus.id} cactus={cactus} />
+          ))}
       </div>
     </>
   );
