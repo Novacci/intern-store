@@ -17,6 +17,8 @@ export interface Cactus {
 export default function CactusList() {
   const [cactuses, setCactuses] = useState<Cactus[]>([]);
   const [query, setQuery] = useState<string>('');
+  const [sortOrder, setSortOrder] = useState('asc');
+  const [sortedCactuses, setSortedCactuses] = useState<any>([]);
   const cactusCollection = collection(db, 'cactuses');
 
   useEffect(() => {
@@ -36,9 +38,22 @@ export default function CactusList() {
     (cactus) => cactus.title.toLowerCase().indexOf(query.toLowerCase()) !== -1
   );
 
+  const handleSortClick = () => {
+    const newSortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+    setSortOrder(newSortOrder);
+
+    const newSortedCactuses = filteredCactuses
+      .slice()
+      .sort((a, b) =>
+        newSortOrder === 'asc' ? a.price - b.price : b.price - a.price
+      );
+    setSortedCactuses(newSortedCactuses);
+  };
+
   return (
     <>
       <div className="text-lg relative flex justify-end top-6 bg-transparent text-gray-800">
+        <button onClick={handleSortClick}>sorting</button>
         <div className="flex max-w-[10rem] items-center border-b  border-teal-500 py-2">
           <input
             className="bg-transparent border-none mr-3 px-2 leading-tight focus:outline-none"
@@ -61,7 +76,7 @@ export default function CactusList() {
       </div>
 
       <div className="flex gap-12 flex-wrap relative justify-center top-12">
-        {filteredCactuses.map((cactus: Cactus) => (
+        {sortedCactuses.map((cactus: Cactus) => (
           <CactusItem key={cactus.id} cactus={cactus} />
         ))}
       </div>
