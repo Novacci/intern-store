@@ -45,7 +45,6 @@ export default function CactusList() {
   const [cactuses, setCactuses] = useState<Cactus[]>(MOCKED_CACTUSES);
   const [query, setQuery] = useState<string>('');
   const [sortOrder, setSortOrder] = useState('asc');
-  // const [cac, setCac] = useState(MOCKED_CACTUSES);
 
   const cactusCollection = collection(db, 'cactuses');
 
@@ -58,25 +57,6 @@ export default function CactusList() {
   //   getCactus();
   // }, []);
 
-  // const queryInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
-  //   setQuery(event.target.value);
-
-  //   const filteredCactuses = cactuses.filter((cactus) =>
-  //     cactus.title.toLowerCase().includes(event.target.value)
-  //   );
-  //   console.log(filteredCactuses);
-  //   console.log(event.target.value);
-  //   setCac(filteredCactuses);
-  // };
-
-  // const handleSortClick = () => {
-  //   const newSortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
-  //   setSortOrder(newSortOrder);
-  //   const newSortedCactuses = cactuses.sort((a, b) =>
-  //     newSortOrder === 'asc' ? a.price - b.price : b.price - a.price
-  //   );
-  //   setCac(newSortedCactuses);
-  // };
   const queryInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
   };
