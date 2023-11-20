@@ -15,7 +15,7 @@ import { Cactus } from '@/components/CactusItems/CactusDetailPage';
 import { ChangeEvent } from 'react';
 
 export interface Product {
-  removeCactus: () => void;
+  removeCactus: (id: string) => void;
   cactusId: string;
   totalPrice: number;
   cactusesList: Cactus[];
@@ -120,7 +120,7 @@ export default function CartModal(props: Product) {
                     )}
                   </div>
                   <HiOutlineTrash
-                    onClick={removeCactus}
+                    onClick={() => removeCactus(product.cactusId)}
                     className="text-xl cursor-pointer"
                   />
                 </div>
@@ -129,7 +129,7 @@ export default function CartModal(props: Product) {
                     <button
                       onClick={() =>
                         product.quantity === 1
-                          ? removeCactus()
+                          ? removeCactus(product.cactusId)
                           : decrementCartQuantityHandler(product.cactusId)
                       }
                       className="bg-[#f3f4f3] text-base w-8 h-8 text-center cursor-pointer transition-[0.5s] duration-[ease] rounded-[50%] border-[none] hover:text-[white] hover:bg-[#00c189]"

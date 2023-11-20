@@ -67,6 +67,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
             ...(data.data() as Cactus),
             cactusId: data.id,
           };
+          console.log(fetchedCactus);
           setCactus(fetchedCactus);
           setTotalPrice(quantity * fetchedCactus.price);
         } else {
@@ -88,16 +89,11 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
   }, [quantity]);
 
   useEffect(() => {
-    if (cactus !== undefined) {
-      localStorage.setItem('cactusKey', JSON.stringify(cactusesList));
-    }
-  }, [cactusesList]);
-
-  useEffect(() => {
     const cactus = localStorage.getItem('cactusKey');
     if (cactus) {
       setCactusesList((prev) => [...prev, ...JSON.parse(cactus)]);
     }
+    console.log('lista');
   }, []);
 
   const addToCartList = () => {
@@ -106,13 +102,29 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
         (item) => item.cactusId === cactus?.cactusId
       );
       if (!existingCactus) {
-        return [...prev, { ...cactus, quantity: quantity }];
+        const newList = [...prev, { ...cactus, quantity: quantity }];
+        localStorage.setItem('cactusKey', JSON.stringify(newList));
+        return newList;
       }
-      return prev.map((plant) =>
+      const newList = prev.map((plant) =>
         plant.cactusId === cactus?.cactusId
           ? { ...plant, quantity: +plant.quantity + quantity }
           : { ...plant, quantity }
       );
+      localStorage.setItem('cactusKey', JSON.stringify(newList));
+      return newList;
+    });
+  };
+
+  const removeCactus = (id: string) => {
+    setCactusesList((prev) => {
+      const newCactusesList = prev.filter((item) => {
+        console.log(item.cactusId);
+        console.log(cactus?.cactusId);
+        return item.cactusId !== id;
+      });
+      localStorage.setItem('cactusKey', JSON.stringify(newCactusesList));
+      return newCactusesList;
     });
   };
 
@@ -127,23 +139,13 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
     dispatch(showCart());
   };
 
-  const removeCactus = () => {
-    setCactusesList((prev) => {
-      const newCactusesList = prev.filter(
-        (item) => item.cactusId !== cactus?.cactusId
-      );
-      localStorage.setItem('cactusKey', JSON.stringify(newCactusesList));
-      return newCactusesList;
-    });
-  };
-
   return (
     <>
       {isLoading ? (
         <LoadingIndicator />
       ) : (
         cactus && (
-          <div className="flex pt-6 font-sans">
+          <div className={`flex pt-6 font-sans ${showCartModal ? '' : ''}`}>
             <Image width={380} height={380} src={cactus.image} alt="garden" />
 
             <div className="w-full pl-4">
