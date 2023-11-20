@@ -14,48 +14,21 @@ export interface Cactus {
   price: number;
 }
 
-const MOCKED_CACTUSES = [
-  {
-    id: '1',
-    title: 'wojtas',
-    // image:
-    //   'https://firebasestorage.googleapis.com/v0/b/internstore-1a37a.appspot.com/o/cactuses%2FBall%20Cactus.png?alt=media&token=f170821d-a363-41f1-aa0f-12e3e693df7d',
-    description: 'bardzo fajny kaktusik',
-    price: 19.99,
-  },
-  {
-    id: '2',
-    title: 'berewicz',
-    // image:
-    //   'https://firebasestorage.googleapis.com/v0/b/internstore-1a37a.appspot.com/o/cactuses%2FBall%20Cactus.png?alt=media&token=f170821d-a363-41f1-aa0f-12e3e693df7d',
-    description: 'fajny katkus',
-    price: 14.99,
-  },
-  {
-    id: '3',
-    title: 'mateo',
-    // image:
-    //   'https://firebasestorage.googleapis.com/v0/b/internstore-1a37a.appspot.com/o/cactuses%2FBall%20Cactus.png?alt=media&token=f170821d-a363-41f1-aa0f-12e3e693df7d',
-    description: 'fajny katkus',
-    price: 29.99,
-  },
-];
-
 export default function CactusList() {
-  const [cactuses, setCactuses] = useState<Cactus[]>(MOCKED_CACTUSES);
+  const [cactuses, setCactuses] = useState<Cactus[]>([]);
   const [query, setQuery] = useState<string>('');
   const [sortOrder, setSortOrder] = useState('asc');
 
   const cactusCollection = collection(db, 'cactuses');
 
-  // useEffect(() => {
-  //   const getCactus = async () => {
-  //     const data = await getDocs(cactusCollection);
+  useEffect(() => {
+    const getCactus = async () => {
+      const data = await getDocs(cactusCollection);
 
-  //     setCactuses(data.docs.map((doc: any) => ({ ...doc.data(), id: doc.id })));
-  //   };
-  //   getCactus();
-  // }, []);
+      setCactuses(data.docs.map((doc: any) => ({ ...doc.data(), id: doc.id })));
+    };
+    getCactus();
+  }, []);
 
   const queryInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
