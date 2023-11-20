@@ -119,8 +119,6 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
   const removeCactus = (id: string) => {
     setCactusesList((prev) => {
       const newCactusesList = prev.filter((item) => {
-        console.log(item.cactusId);
-        console.log(cactus?.cactusId);
         return item.cactusId !== id;
       });
       localStorage.setItem('cactusKey', JSON.stringify(newCactusesList));
