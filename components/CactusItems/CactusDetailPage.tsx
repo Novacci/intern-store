@@ -47,7 +47,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
   const [cactus, setCactus] = useState<Cactus | undefined>();
   const [cactusesList, setCactusesList] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [price, setPrice] = useState(0);
   const [displayChoice, setDisplayChoice] = useState(
     DisplayChoices.Specifications
   );
@@ -69,7 +69,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
           };
           console.log(fetchedCactus);
           setCactus(fetchedCactus);
-          setTotalPrice(quantity * fetchedCactus.price);
+          setPrice(quantity * fetchedCactus.price);
         } else {
           console.error('Cactus not found.');
         }
@@ -84,7 +84,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
 
   useEffect(() => {
     if (cactus !== undefined) {
-      setTotalPrice((quantity * Math.floor(cactus.price * 100)) / 100);
+      setPrice((quantity * Math.floor(cactus.price * 100)) / 100);
     }
   }, [quantity]);
 
@@ -188,7 +188,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
               </div>
               <div className="flex justify-between font-bold px-0 py-2 border-b-[#9e9e9e] border-b-[100%] border-b border-solid">
                 <span>Total:</span>
-                <span>{formatCurrency(totalPrice)}</span>
+                <span>{formatCurrency(price)}</span>
               </div>
               <div className="flex justify-end items-center mx-0 my-2">
                 <div className="text-2xl transition-[color] duration-[0.5s] ease-[ease] cursor-pointer mr-2 hover:text-[red]">
@@ -314,12 +314,12 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
       </div>
       {showCartModal && (
         <CartModal
-          totalPrice={totalPrice}
+          price={price}
           cactusesList={cactusesList}
           removeCactus={removeCactus}
           cactusId={props.cactusId}
           setCactusesList={setCactusesList}
-          setTotalPrice={setTotalPrice}
+          setPrice={setPrice}
         />
       )}
     </>

@@ -17,25 +17,26 @@ import { ChangeEvent } from 'react';
 export interface Product {
   removeCactus: (id: string) => void;
   cactusId: string;
-  totalPrice: number;
+  price: number;
   cactusesList: Cactus[];
   setCactusesList: Dispatch<SetStateAction<any[]>>;
-  setTotalPrice: Dispatch<SetStateAction<number>>;
+  setPrice: Dispatch<SetStateAction<number>>;
 }
 
 export default function CartModal(props: Product) {
   const {
-    totalPrice,
+    price,
     removeCactus,
     cactusesList,
     setCactusesList,
-    setTotalPrice,
+    setPrice: setPrice,
   } = props;
   const dispatch = useDispatch<AppDispatch>();
   const [discountCode, setDiscoutCode] = useState<string>('');
   const [isDiscounted, setIsDiscounted] = useState<boolean>(false);
   const [isNotDiscounted, setIsNotDiscounted] = useState<boolean>(false);
   const [discountAlreadyUsed, setIsDiscountAlreadyUsed] = useState(false);
+  const [totalPrice, setTotalPrice] = useState<number>();
 
   const decrementCartQuantityHandler = (id: string) => {
     setCactusesList((prev) => {
@@ -63,7 +64,7 @@ export default function CartModal(props: Product) {
 
   const discoutCodeValidator = () => {
     if (discountCode === 'RABAT25') {
-      setTotalPrice(totalPrice * 0.75);
+      setPrice(price * 0.75);
       setIsDiscounted(true);
       setIsNotDiscounted(false);
       setIsDiscountAlreadyUsed(true);
@@ -198,7 +199,7 @@ export default function CartModal(props: Product) {
           <span className="font-bold text-[#7E8784]"> (including VAT)</span>
         </span>
         <span className="font-bold text-[#00c189]">
-          {formatCurrency(totalPrice)}
+          {formatCurrency(price)}
         </span>
       </div>
       <div className="flex flex-col h-20">
