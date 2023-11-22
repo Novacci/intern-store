@@ -67,7 +67,7 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
             ...(data.data() as Cactus),
             cactusId: data.id,
           };
-          console.log(fetchedCactus);
+
           setCactus(fetchedCactus);
           setPrice(quantity * fetchedCactus.price);
         } else {
@@ -93,7 +93,6 @@ export default function CactusDetailPage(props: CactusDetailPageParams) {
     if (cactus) {
       setCactusesList((prev) => [...prev, ...JSON.parse(cactus)]);
     }
-    console.log('lista');
   }, []);
 
   const addToCartList = () => {

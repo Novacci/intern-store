@@ -1,7 +1,7 @@
 'use client';
 
 import { Dispatch, SetStateAction } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import { TiTick } from 'react-icons/ti';
 import Image from 'next/image';
@@ -36,7 +36,18 @@ export default function CartModal(props: Product) {
   const [isDiscounted, setIsDiscounted] = useState<boolean>(false);
   const [isNotDiscounted, setIsNotDiscounted] = useState<boolean>(false);
   const [discountAlreadyUsed, setIsDiscountAlreadyUsed] = useState(false);
-  const [totalPrice, setTotalPrice] = useState<number>();
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+
+  //! Setter for total price in cart
+  useEffect(() => {
+    if (cactusesList) {
+      let totalPrice = 0;
+      cactusesList.forEach((cactus) => {
+        totalPrice += cactus.price * cactus.quantity;
+      });
+      setTotalPrice(totalPrice);
+    }
+  }, [cactusesList]);
 
   const decrementCartQuantityHandler = (id: string) => {
     setCactusesList((prev) => {
@@ -199,7 +210,7 @@ export default function CartModal(props: Product) {
           <span className="font-bold text-[#7E8784]"> (including VAT)</span>
         </span>
         <span className="font-bold text-[#00c189]">
-          {formatCurrency(price)}
+          {formatCurrency(totalPrice)}
         </span>
       </div>
       <div className="flex flex-col h-20">
