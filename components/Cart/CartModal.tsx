@@ -75,7 +75,7 @@ export default function CartModal(props: Product) {
 
   const discoutCodeValidator = () => {
     if (discountCode === 'RABAT25') {
-      setPrice(price * 0.75);
+      setTotalPrice(totalPrice * 0.75);
       setIsDiscounted(true);
       setIsNotDiscounted(false);
       setIsDiscountAlreadyUsed(true);
