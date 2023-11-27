@@ -3,7 +3,7 @@ import cart from '@/public/images/icons/cart.svg';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 import { showCart, hideCart } from '@/app/utilities/showHideCartSlice';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CartModal from './CartModal';
 import { AppDispatch } from '@/app/redux/store/store';
 import { useAppSelector } from '@/app/redux/store/store';
@@ -20,17 +20,16 @@ export default function Cart() {
     dispatch(showCart());
   };
 
-  const closeCartToggle = () => {
-    dispatch(hideCart());
-  };
-
   return (
     <div>
       <div className="no-underline flex items-center">
-        <Image src={cart} alt="cart" />
+        <div onClick={showCartToggle}>
+          <Image src={cart} alt="cart" />
+        </div>
         <span className="text-[#00c189] font-bold h-12 flex items-end">
           {cartValue}
         </span>
+        {/* {showCartModal && <CartModal />} */}
       </div>
     </div>
   );

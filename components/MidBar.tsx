@@ -5,12 +5,8 @@ import Login from './Login';
 import Cart from './Cart/Cart';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@/app/redux/store/store';
-import { showCart } from '@/app/utilities/showHideCartSlice';
 
 export default function MidBar() {
-  const dispatch = useDispatch<AppDispatch>();
   return (
     <div className="flex items-center justify-between px-5 py-2.5 max-w-[900px] min-w-[360px]">
       <motion.div
@@ -29,12 +25,7 @@ export default function MidBar() {
       <div className="flex items-center gap-6">
         <SelectCurrency />
         <Login />
-        <div
-          className="cursor-pointer"
-          onClick={() => {
-            dispatch(showCart());
-          }}
-        >
+        <div className="cursor-pointer">
           <Cart />
         </div>
       </div>
